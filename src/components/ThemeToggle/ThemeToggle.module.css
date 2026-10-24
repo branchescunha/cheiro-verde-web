@@ -1,0 +1,51 @@
+.toggle {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  background: var(--color-surface);
+  place-items: center;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.toggle:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand-on-light);
+  background: var(--color-surface-muted);
+}
+
+.sunIcon,
+.moonIcon {
+  width: 1.125rem;
+  height: 1.125rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.75;
+}
+
+.sunIcon {
+  display: none;
+}
+
+:global(:root[data-theme="dark"]) .sunIcon {
+  display: block;
+}
+
+:global(:root[data-theme="dark"]) .moonIcon {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle {
+    transition: none;
+  }
+}

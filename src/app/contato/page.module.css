@@ -1,0 +1,407 @@
+.main {
+  display: block;
+  min-height: 100vh;
+  padding: 0;
+  overflow-x: clip;
+  background: var(--color-background);
+  text-align: left;
+}
+
+.container {
+  width: min(100%, var(--container-lg));
+  margin-inline: auto;
+  padding-inline: var(--container-gutter);
+}
+
+.hero {
+  background: var(--color-background);
+}
+
+.heroGrid,
+.heroContent,
+.sectionIntroduction,
+.benefitsGrid,
+.benefitsIntroduction,
+.faqGrid,
+.faqIntroduction {
+  display: grid;
+}
+
+.heroGrid {
+  gap: var(--space-xl);
+  align-items: end;
+  padding-block: clamp(var(--space-xl), 6vw, var(--space-2xl));
+}
+
+.heroContent,
+.sectionIntroduction,
+.benefitsIntroduction,
+.faqIntroduction {
+  gap: var(--space-sm);
+}
+
+.eyebrow,
+.cardLabel {
+  color: var(--color-brand);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.14em;
+  line-height: var(--line-height-snug);
+  text-transform: uppercase;
+}
+
+.eyebrowDark,
+.cardLabel {
+  color: var(--color-brand-on-light);
+}
+
+.heroTitle {
+  max-width: 13ch;
+  font-size: var(--font-size-page-title);
+  letter-spacing: -0.055em;
+}
+
+.heroText {
+  max-width: 39rem;
+  color: var(--color-text-muted);
+  font-size: clamp(var(--font-size-lg), 1rem + 0.4vw, var(--font-size-xl));
+  line-height: var(--line-height-relaxed);
+}
+
+.schedulePanel {
+  display: grid;
+  gap: var(--space-md);
+  margin: 0;
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.schedulePanel > div {
+  display: grid;
+  gap: var(--space-3xs);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.schedulePanel > div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.schedulePanel dt {
+  color: var(--color-brand);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.schedulePanel dd {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.schedulePanel dd:first-of-type {
+  color: var(--color-text);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.section {
+  padding-block: var(--section-block-space);
+}
+
+.informationSection {
+  padding-block: clamp(var(--space-xl), 5vw, var(--space-2xl));
+  color: var(--color-text-dark);
+  background: var(--color-surface-light);
+}
+
+.sectionTitle {
+  max-width: 17ch;
+  font-size: var(--font-size-section-title);
+  letter-spacing: -0.045em;
+}
+
+.informationGrid {
+  display: grid;
+  margin-top: var(--space-xl);
+  border-block: 1px solid var(--color-border-light);
+}
+
+.informationGrid article {
+  display: grid;
+  gap: var(--space-sm);
+  align-content: start;
+  padding-block: var(--space-lg);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.informationGrid article:last-child {
+  border-bottom: 0;
+}
+
+.informationGrid h3 {
+  font-size: var(--font-size-feature-title);
+}
+
+.locationCard address {
+  color: var(--color-text-muted);
+  font-style: normal;
+}
+
+.button {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 3rem;
+  gap: var(--space-2xs);
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.buttonPrimary {
+  color: var(--color-text-inverse);
+  background: var(--color-brand-on-light);
+}
+
+.buttonPrimary:hover {
+  color: var(--color-text-inverse);
+  background: var(--color-brand-hover);
+}
+
+.serviceCard dl {
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0;
+}
+
+.serviceCard dl > div {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+.serviceCard dt {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.serviceCard dd {
+  margin: 0;
+  color: var(--color-text-dark);
+}
+
+.contactActions {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-border-light);
+  list-style: none;
+}
+
+.contactActions a {
+  display: grid;
+  gap: var(--space-3xs);
+  min-height: 3.5rem;
+  justify-content: start;
+  padding-block: var(--space-xs);
+  border-bottom: 1px solid var(--color-border-light);
+  color: var(--color-text-dark);
+  text-decoration: none;
+}
+
+.contactActions a > span:first-child {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contactActions strong {
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-sm);
+}
+
+.contactActions a:hover strong {
+  color: var(--color-brand-on-light);
+}
+
+.benefitsSection {
+  border-block: 1px solid var(--section-border);
+}
+
+.benefitsSection .eyebrow {
+  color: var(--section-fg);
+}
+
+.benefitsGrid {
+  gap: var(--space-xl);
+}
+
+.benefitList {
+  display: grid;
+  border-top: 1px solid var(--section-border);
+}
+
+.benefitList article {
+  display: grid;
+  gap: var(--space-md);
+  padding-block: var(--space-lg);
+  border-bottom: 1px solid var(--section-border);
+}
+
+.benefitValue {
+  color: var(--section-accent);
+  font-family: var(--font-family-heading);
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.benefitList article > div {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.benefitList h3 {
+  color: var(--section-fg);
+  font-size: var(--font-size-xl);
+}
+
+.benefitList article > div > p {
+  color: var(--section-muted);
+}
+
+.eligibleLabel {
+  margin-top: var(--space-xs);
+  color: var(--section-fg) !important;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eligibleGroups {
+  font-size: var(--font-size-sm);
+}
+
+.faqSection {
+  background: var(--color-background);
+}
+
+.faqGrid {
+  gap: var(--space-xl);
+}
+
+.faqList {
+  border-top: 1px solid var(--color-border);
+}
+
+.faqList details {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.faqList summary {
+  min-height: 3.75rem;
+  padding-block: var(--space-sm);
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.faqList summary::marker {
+  color: var(--color-brand);
+}
+
+.faqList details p {
+  max-width: 42rem;
+  padding: 0 0 var(--space-md);
+  color: var(--color-text-muted);
+}
+
+.faqList a {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-semibold);
+  text-underline-offset: 0.2em;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-width: 48rem) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+    gap: clamp(var(--space-xl), 7vw, 6rem);
+  }
+
+  .informationGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .informationGrid article {
+    padding-inline: var(--space-lg);
+    border-right: 1px solid var(--color-border-light);
+    border-bottom: 0;
+  }
+
+  .informationGrid article:first-child {
+    padding-left: 0;
+  }
+
+  .informationGrid article:last-child {
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .benefitsGrid,
+  .faqGrid {
+    grid-template-columns: minmax(15rem, 0.65fr) minmax(0, 1.35fr);
+    gap: clamp(var(--space-xl), 7vw, 6rem);
+    align-items: start;
+  }
+
+}
+
+@media (min-width: 64rem) {
+  .benefitList article {
+    grid-template-columns: minmax(11rem, 0.38fr) minmax(0, 1fr);
+  }
+
+  .faqIntroduction {
+    position: sticky;
+    top: 7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}
