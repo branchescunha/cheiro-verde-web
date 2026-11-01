@@ -15,30 +15,26 @@ const restaurantStructuredData = createRestaurantStructuredData(
 );
 
 export const metadata: Metadata = {
-  metadataBase: new URL(seoConfig.siteUrl),
   title: {
-    default: "Restaurante Paladar | Almoço em Ceilândia",
-    template: "%s | Paladar",
+    default: "Restaurante Cheiro Verde | Ceilândia",
+    template: "%s | Cheiro Verde",
   },
   description:
-    "Restaurante Paladar em Ceilândia, com self-service, churrasco e almoço todos os dias no Setor O.",
+    "Restaurante Cheiro Verde no Setor O, em Ceilândia, com tradição, variedade e qualidade desde 1999.",
   applicationName: seoConfig.siteName,
   openGraph: {
     type: "website",
     locale: seoConfig.locale,
-    url: seoConfig.siteUrl,
     siteName: seoConfig.siteName,
-    title: "Restaurante Paladar | Almoço em Ceilândia",
+    title: "Restaurante Cheiro Verde | Ceilândia",
     description:
-      "Restaurante Paladar em Ceilândia, com self-service, churrasco e almoço todos os dias no Setor O.",
-    images: [seoConfig.socialImage],
+      "Restaurante Cheiro Verde no Setor O, em Ceilândia, com tradição, variedade e qualidade desde 1999.",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Restaurante Paladar | Almoço em Ceilândia",
+    card: "summary",
+    title: "Restaurante Cheiro Verde | Ceilândia",
     description:
-      "Restaurante Paladar em Ceilândia, com self-service, churrasco e almoço todos os dias no Setor O.",
-    images: [seoConfig.socialImage.url],
+      "Restaurante Cheiro Verde no Setor O, em Ceilândia, com tradição, variedade e qualidade desde 1999.",
   },
   manifest: "/manifest.webmanifest",
   icons: {

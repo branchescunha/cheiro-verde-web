@@ -51,6 +51,15 @@ function contrastRatio(foreground, background) {
 }
 
 const lightTokens = getDeclarations(getRule(globalsCss, ":root"));
+const darkTokens = new Map([
+  ...lightTokens,
+  ...getDeclarations(getRule(globalsCss, ':root[data-theme="dark"]')),
+]);
+
+test("uses the official Cheiro Verde colors as palette foundations", () => {
+  assert.equal(lightTokens.get("--color-green-800"), "#005030");
+  assert.equal(lightTokens.get("--color-green-500"), "#90c030");
+});
 
 test("brand text meets WCAG AA on both light cream surfaces", () => {
   const brandOnLight = resolveColor(
@@ -83,4 +92,50 @@ test("footer section titles meet WCAG AA in the light theme", () => {
     contrastRatio(foreground, background) >= 4.5,
     `${foreground} on ${background} must reach 4.5:1`,
   );
+});
+
+test("brand text meets WCAG AA on dark theme surfaces", () => {
+  const brand = resolveColor(darkTokens.get("--color-brand"), darkTokens);
+
+  for (const backgroundToken of ["--color-background", "--color-surface"]) {
+    const background = resolveColor(darkTokens.get(backgroundToken), darkTokens);
+    assert.ok(
+      contrastRatio(brand, background) >= 4.5,
+      `${brand} on ${background} must reach 4.5:1`,
+    );
+  }
+});
+
+test("button text meets WCAG AA on brand hover backgrounds in both themes", () => {
+  for (const tokens of [lightTokens, darkTokens]) {
+    const foreground = resolveColor(
+      tokens.get("--color-text-inverse"),
+      tokens,
+    );
+    const background = resolveColor(tokens.get("--color-brand-hover"), tokens);
+
+    assert.ok(
+      contrastRatio(foreground, background) >= 4.5,
+      `${foreground} on ${background} must reach 4.5:1`,
+    );
+  }
+});
+
+test("brand surfaces keep readable foreground and muted text", () => {
+  const surfaceTokens = new Map([
+    ...lightTokens,
+    ...getDeclarations(getRule(globalsCss, '[data-surface="brand"]')),
+  ]);
+  const background = resolveColor(surfaceTokens.get("--section-bg"), surfaceTokens);
+
+  for (const foregroundToken of ["--section-fg", "--section-muted"]) {
+    const foreground = resolveColor(
+      surfaceTokens.get(foregroundToken),
+      surfaceTokens,
+    );
+    assert.ok(
+      contrastRatio(foreground, background) >= 4.5,
+      `${foreground} on ${background} must reach 4.5:1`,
+    );
+  }
 });

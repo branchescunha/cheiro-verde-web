@@ -4,47 +4,22 @@ import type {
   SeoConfig,
 } from "@/lib/seo";
 
-const siteUrl = "https://churrascariapaladar.com.br";
-
 export const seoConfig = {
-  siteUrl,
-  siteName: "Restaurante Paladar",
+  siteName: siteContent.brand.fullName,
   locale: "pt_BR",
-  socialImage: {
-    url: `${siteUrl}/images/brand/paladar-social-preview.jpg`,
-    width: 1200,
-    height: 630,
-    alt: "Restaurante Paladar",
-  },
-  logoUrl: `${siteUrl}/images/brand/paladar-logo-transparent.png`,
-  menuUrl: `${siteUrl}/cardapio`,
-  restaurantOpeningDays: [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ],
 } as const satisfies SeoConfig;
 
 export const restaurantSeoData = {
-  name: "Restaurante Paladar",
-  alternateNames: [
-    siteContent.brand.primaryName,
-    "Paladar Prime Restaurante",
-  ],
-  telephone: "+5561984163455",
-  instagramUrl: siteContent.contacts.instagram.href,
+  name: siteContent.brand.fullName,
+  alternateNames: siteContent.brand.alternativeNames,
+  legalName: siteContent.legal.businessName,
+  email: siteContent.contacts.email.address,
+  foundingDate: "1999",
   address: {
-    streetAddress: `${siteContent.address.line1}, Avenida Oeste, Setor O`,
+    streetAddress: `${siteContent.address.line1}, Setor O`,
+    postalCode: siteContent.address.postalCode,
     addressLocality: "Ceilândia",
     addressRegion: "DF",
     addressCountry: "BR",
-  },
-  openingHours: {
-    opens: siteContent.restaurantHours.opensAt,
-    closes: siteContent.restaurantHours.closesAt,
   },
 } as const satisfies RestaurantStructuredDataInput;

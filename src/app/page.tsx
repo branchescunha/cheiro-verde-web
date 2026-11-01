@@ -1,17 +1,18 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Hero } from "@/components/Hero/Hero";
+import { PageLink } from "@/components/PageLink/PageLink";
 import { restaurantContent } from "@/data/restaurant";
 import { seoConfig } from "@/data/seo";
+import { siteLinks } from "@/data/site-links";
 import { siteContent, siteRoutes } from "@/data/site";
 import { createPageMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata(
   {
-    title: "Restaurante Paladar | Almoço em Ceilândia",
+    title: "Restaurante Cheiro Verde | Ceilândia",
     description:
-      "Restaurante Paladar em Ceilândia, com self-service, churrasco e almoço todos os dias no Setor O.",
+      "Restaurante Cheiro Verde no Setor O, em Ceilândia, com tradição, variedade e qualidade desde 1999.",
     path: "/",
     absoluteTitle: true,
   },
@@ -43,12 +44,12 @@ export default function Home() {
             <p className={styles.heroText}>
               Self-service e churrasco para um almoço completo no Setor O.
             </p>
-            <Link
+            <PageLink
               className={`${styles.button} ${styles.buttonPrimary}`}
               href={siteRoutes.menu}
             >
               Ver cardápio
-            </Link>
+            </PageLink>
           </div>
         </div>
       </Hero>
@@ -62,7 +63,7 @@ export default function Home() {
             <Image
               className={styles.mediaImage}
               src="/images/site/restaurant-buffet.webp"
-              alt="Buffet de saladas e acompanhamentos do Paladar"
+              alt="Buffet de saladas e acompanhamentos do Cheiro Verde"
               width={1440}
               height={810}
               sizes="(min-width: 48rem) 50vw, 100vw"
@@ -71,7 +72,7 @@ export default function Home() {
 
           <div className={styles.editorialContent}>
             <p className={`${styles.eyebrow} ${styles.eyebrowDark}`}>
-              O almoço no Paladar
+              O almoço no Cheiro Verde
             </p>
             <h2 id="lunch-title" className={styles.sectionTitle}>
               Variedade para montar o prato do seu jeito.
@@ -98,7 +99,7 @@ export default function Home() {
             <Image
               className={styles.mediaImage}
               src="/images/site/restaurant-grill.webp"
-              alt="Churrasqueira do restaurante Paladar"
+              alt="Churrasqueira do Restaurante Cheiro Verde"
               width={1440}
               height={810}
               sizes="(min-width: 48rem) 50vw, 100vw"
@@ -111,7 +112,7 @@ export default function Home() {
             </h2>
             <p>
               O {barbecue} ocupa lugar de destaque no almoço, com {premiumCuts}{" "}
-              entre as opções do Paladar.
+              entre as opções do Cheiro Verde.
             </p>
           </div>
         </div>
@@ -126,7 +127,7 @@ export default function Home() {
             <Image
               className={styles.mediaImage}
               src="/images/site/restaurant-entrance.webp"
-              alt="Entrada do restaurante Paladar em Ceilândia"
+              alt="Entrada do Restaurante Cheiro Verde em Ceilândia"
               width={1280}
               height={720}
               sizes="(min-width: 48rem) 50vw, 100vw"
@@ -138,15 +139,16 @@ export default function Home() {
               Desde {history.foundation.year}
             </p>
             <h2 id="story-title" className={styles.sectionTitle}>
-              Uma história de família construída em Ceilândia.
+              Tradição, sabor e qualidade desde 1999.
             </h2>
             <p>
-              Fundado em {history.foundation.location}, o Paladar mantém sua{" "}
-              {history.legacy}.
+              Fundado em {history.foundation.year}, o Cheiro Verde iniciou uma
+              trajetória de {history.legacy}. Em {history.acquisition.year}, foi
+              adquirido pelo {history.acquisition.organization}.
             </p>
-            <Link className={styles.textLink} href={siteRoutes.about}>
+            <PageLink className={styles.textLink} href={siteRoutes.about}>
               Conhecer nossa história
-            </Link>
+            </PageLink>
           </div>
         </div>
       </section>
@@ -165,10 +167,10 @@ export default function Home() {
           <div className={styles.servicesGrid}>
             <article className={styles.serviceItem}>
               <h3>Marmitas</h3>
-              <p>O Paladar também oferece marmitas para o almoço.</p>
-              <Link className={styles.textLink} href={siteRoutes.lunchboxes}>
+              <p>O Cheiro Verde também oferece marmitas para o almoço.</p>
+              <PageLink className={styles.textLink} href={siteRoutes.lunchboxes}>
                 Conhecer marmitas
-              </Link>
+              </PageLink>
             </article>
 
             <article className={styles.serviceItem}>
@@ -176,9 +178,9 @@ export default function Home() {
               <p>
                 O Paladar Buffet é o serviço dedicado a festas e eventos.
               </p>
-              <Link className={styles.textLink} href={siteRoutes.buffet}>
+              <PageLink className={styles.textLink} href={siteRoutes.buffet}>
                 Conhecer o Paladar Buffet
-              </Link>
+              </PageLink>
             </article>
           </div>
         </div>
@@ -194,7 +196,7 @@ export default function Home() {
             <Image
               className={styles.mediaImage}
               src="/images/site/restaurant-facade.webp"
-              alt="Fachada do Restaurante Paladar no Setor O"
+              alt="Fachada do Restaurante Cheiro Verde no Setor O"
               width={1440}
               height={810}
               sizes="(min-width: 48rem) 50vw, 100vw"
@@ -202,7 +204,7 @@ export default function Home() {
           </div>
 
           <div className={styles.locationContent}>
-            <p className={styles.eyebrow}>Encontre o Paladar</p>
+            <p className={styles.eyebrow}>Encontre o Cheiro Verde</p>
             <h2 id="location-title" className={styles.sectionTitle}>
               Almoço todos os dias em Ceilândia.
             </h2>
@@ -233,7 +235,7 @@ export default function Home() {
 
             <a
               className={`${styles.button} ${styles.buttonPrimary}`}
-              href={siteContent.externalLinks.googleMaps.href}
+              href={siteLinks.googleMaps}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Ver localização no Google Maps (abre em nova aba)"

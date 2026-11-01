@@ -4,17 +4,17 @@ import { siteLinks } from "./site-links.ts";
 
 const expectedMessages = {
   general:
-    "Olá! Vi o site do Paladar e gostaria de mais informações.",
+    "Olá! Vi o site do Cheiro Verde e gostaria de mais informações.",
   lunchboxes:
-    "Olá! Vi as marmitas no site do Paladar e gostaria de fazer um pedido.",
+    "Olá! Vi as marmitas no site do Cheiro Verde e gostaria de fazer um pedido.",
   fit:
-    "Olá! Vi a marmita Fit no site do Paladar e gostaria de pedir uma por R$ 32,00.",
+    "Olá! Vi a marmita Fit no site do Cheiro Verde e gostaria de pedir uma por R$ 32,00.",
   daily:
-    "Olá! Vi a Marmita do Dia no site do Paladar e gostaria de pedir uma por R$ 35,00.",
+    "Olá! Vi a Marmita do Dia no site do Cheiro Verde e gostaria de pedir uma por R$ 35,00.",
   barbecue:
-    "Olá! Vi a marmita Churrasco no site do Paladar e gostaria de pedir uma por R$ 42,00.",
+    "Olá! Vi a marmita Churrasco no site do Cheiro Verde e gostaria de pedir uma por R$ 42,00.",
   premiumBarbecue:
-    "Olá! Vi a marmita Churrasco Premium no site do Paladar e gostaria de pedir uma por R$ 52,00.",
+    "Olá! Vi a marmita Churrasco Premium no site do Cheiro Verde e gostaria de pedir uma por R$ 52,00.",
 };
 
 function assertWhatsAppLink(href, number, message) {
@@ -64,11 +64,18 @@ test("centralizes every individual lunchbox message", () => {
   );
 });
 
-test("uses the verified Google Maps place instead of a text search", () => {
+test("builds the Google Maps destination for the confirmed Cheiro Verde place", () => {
   const url = new URL(siteLinks.googleMaps);
 
-  assert.equal(url.hostname, "www.google.com");
-  assert.match(url.pathname, /\/maps\/place\/Paladar\+Prime\+Restaurante/);
-  assert.doesNotMatch(url.href, /maps\/search/);
-  assert.match(url.href, /0x4f1e84f44717dc1a/);
+  assert.equal(url.origin, "https://www.google.com");
+  assert.equal(url.pathname, "/maps/search/");
+  assert.equal(url.searchParams.get("api"), "1");
+  assert.equal(
+    url.searchParams.get("query"),
+    "Restaurante Cheiro Verde, QNO 05, Conjunto P, Casa 47, Setor O, Ceilândia - DF, CEP 72255-060",
+  );
+  assert.equal(
+    url.searchParams.get("query_place_id"),
+    "ChIJm0MFO4PLW5MRMkjhZRmyjPw",
+  );
 });

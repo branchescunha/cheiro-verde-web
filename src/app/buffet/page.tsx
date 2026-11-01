@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { PageLink } from "@/components/PageLink/PageLink";
 import { seoConfig } from "@/data/seo";
 import { siteContent, siteRoutes } from "@/data/site";
 import { createPageMetadata } from "@/lib/seo";
@@ -9,7 +9,7 @@ export const metadata = createPageMetadata(
   {
     title: "Paladar Buffet: festas e eventos",
     description:
-      "Conheça o Paladar Buffet, serviço do ecossistema Paladar dedicado a festas, celebrações e eventos.",
+      "Conheça a parceria do Restaurante Cheiro Verde com o Paladar Buffet para festas, celebrações e eventos.",
     path: "/buffet",
   },
   seoConfig,
@@ -25,14 +25,15 @@ export default function BuffetPage() {
           <div className={styles.heroContent}>
             <p className={styles.eyebrow}>Festas &amp; Eventos</p>
             <h1 id="buffet-page-title" className={styles.heroTitle}>
-              O Paladar também faz parte das suas celebrações.
+              Cheiro Verde e Paladar Buffet em novos encontros.
             </h1>
           </div>
 
           <div className={styles.heroSummary}>
             <p>
-              O Paladar Buffet é a frente dedicada a festas, celebrações e
-              eventos dentro do mesmo ecossistema do restaurante.
+              O Restaurante Cheiro Verde integra o Grupo Paladar desde 2014 e
+              apresenta o Paladar Buffet como parceiro para festas,
+              celebrações e eventos.
             </p>
             <a
               className={`${styles.button} ${styles.buttonPrimary}`}
@@ -98,13 +99,13 @@ export default function BuffetPage() {
       >
         <div className={`${styles.container} ${styles.connectionGrid}`}>
           <div className={styles.connectionIntroduction}>
-            <p className={styles.eyebrow}>Uma mesma essência</p>
+            <p className={styles.eyebrow}>Marcas do Grupo Paladar</p>
             <h2 id="connection-title" className={styles.sectionTitle}>
               Do restaurante para novos encontros.
             </h2>
             <p>
-              As duas marcas compartilham uma história familiar construída em
-              torno de gastronomia, cuidado e experiência.
+              Cheiro Verde e Paladar Buffet mantêm identidades e atuações
+              próprias, conectadas pela participação no mesmo grupo.
             </p>
           </div>
 
@@ -123,9 +124,9 @@ export default function BuffetPage() {
             </li>
           </ul>
 
-          <Link className={styles.returnLink} href={siteRoutes.home}>
+          <PageLink className={styles.returnLink} href={siteRoutes.home}>
             Voltar ao Restaurante
-          </Link>
+          </PageLink>
         </div>
       </section>
     </main>

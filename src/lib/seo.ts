@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 
 export type SeoConfig = {
-  siteUrl: string;
+  siteUrl?: string;
   siteName: string;
   locale: string;
-  socialImage: {
+  socialImage?: {
     url: string;
     width: number;
     height: number;
     alt: string;
   };
-  logoUrl: string;
-  menuUrl: string;
-  restaurantOpeningDays: readonly string[];
+  logoUrl?: string;
+  menuUrl?: string;
+  restaurantOpeningDays?: readonly string[];
 };
 
 export type PageMetadataInput = {
@@ -25,15 +25,19 @@ export type PageMetadataInput = {
 export type RestaurantStructuredDataInput = {
   name: string;
   alternateNames: readonly string[];
-  telephone: string;
-  instagramUrl: string;
+  legalName?: string;
+  email?: string;
+  foundingDate?: string;
+  telephone?: string;
+  instagramUrl?: string;
   address: {
     streetAddress: string;
+    postalCode?: string;
     addressLocality: string;
     addressRegion: string;
     addressCountry: string;
   };
-  openingHours: {
+  openingHours?: {
     opens: string;
     closes: string;
   };
@@ -48,14 +52,14 @@ export function createPageMetadata(
   }: PageMetadataInput,
   config: SeoConfig,
 ): Metadata {
-  const canonicalUrl = new URL(path, config.siteUrl).toString();
+  const canonicalUrl = config.siteUrl
+    ? new URL(path, config.siteUrl).toString()
+    : undefined;
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    ...(canonicalUrl ? { alternates: { canonical: canonicalUrl } } : {}),
     robots: {
       index: true,
       follow: true,
@@ -63,17 +67,17 @@ export function createPageMetadata(
     openGraph: {
       type: "website",
       locale: config.locale,
-      url: canonicalUrl,
+      ...(canonicalUrl ? { url: canonicalUrl } : {}),
       siteName: config.siteName,
       title,
       description,
-      images: [config.socialImage],
+      ...(config.socialImage ? { images: [config.socialImage] } : {}),
     },
     twitter: {
-      card: "summary_large_image",
+      card: config.socialImage ? "summary_large_image" : "summary",
       title,
       description,
-      images: [config.socialImage.url],
+      ...(config.socialImage ? { images: [config.socialImage.url] } : {}),
     },
   };
 }
@@ -82,6 +86,9 @@ export function createRestaurantStructuredData(
   {
     name,
     alternateNames,
+    legalName,
+    email,
+    foundingDate,
     telephone,
     instagramUrl,
     address,
@@ -92,27 +99,34 @@ export function createRestaurantStructuredData(
   return {
     "@context": "https://schema.org",
     "@type": "Restaurant",
-    "@id": `${config.siteUrl}/#restaurant`,
+    ...(config.siteUrl ? { "@id": `${config.siteUrl}/#restaurant` } : {}),
     name,
     alternateName: alternateNames,
-    url: config.siteUrl,
-    image: config.socialImage.url,
-    logo: config.logoUrl,
-    telephone,
-    sameAs: [instagramUrl],
-    menu: config.menuUrl,
+    ...(legalName ? { legalName } : {}),
+    ...(email ? { email } : {}),
+    ...(foundingDate ? { foundingDate } : {}),
+    ...(config.siteUrl ? { url: config.siteUrl } : {}),
+    ...(config.socialImage ? { image: config.socialImage.url } : {}),
+    ...(config.logoUrl ? { logo: config.logoUrl } : {}),
+    ...(telephone ? { telephone } : {}),
+    ...(instagramUrl ? { sameAs: [instagramUrl] } : {}),
+    ...(config.menuUrl ? { menu: config.menuUrl } : {}),
     address: {
       "@type": "PostalAddress",
       ...address,
     },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: config.restaurantOpeningDays,
-        opens: openingHours.opens,
-        closes: openingHours.closes,
-      },
-    ],
+    ...(openingHours && config.restaurantOpeningDays
+      ? {
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: config.restaurantOpeningDays,
+              opens: openingHours.opens,
+              closes: openingHours.closes,
+            },
+          ],
+        }
+      : {}),
   };
 }
 

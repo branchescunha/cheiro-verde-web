@@ -1,5 +1,3 @@
-import { siteLinks } from "@/data/site-links";
-
 export type HttpsUrl = `https://${string}`;
 export type MailtoUrl = `mailto:${string}`;
 
@@ -11,7 +9,6 @@ export const siteRoutes = {
   buffet: "/buffet",
   contact: "/contato",
 } as const;
-
 export const homeStartHref = "/#inicio" as const;
 
 export type SiteRoute = (typeof siteRoutes)[keyof typeof siteRoutes];
@@ -31,16 +28,19 @@ export const navigationItems = [
 
 export const siteContent = {
   brand: {
-    primaryName: "Paladar",
-    alternativeNames: ["Restaurante Paladar", "Paladar Prime Restaurante"],
+    primaryName: "Cheiro Verde",
+    fullName: "Restaurante Cheiro Verde",
+    alternativeNames: ["Cheiro Verde"],
   },
   tagline: "Comida feita com cuidado para reunir pessoas à mesa.",
   legal: {
-    cnpj: "03.259.872/0001-67",
+    businessName: "RESTAURANTE CHEIRO VERDE SELF SERVICE LTDA",
+    cnpj: "68.017.002/0001-27",
   },
   address: {
-    line1: "QNO 11 Conjunto O Casa 16",
-    line2: "Avenida Oeste, Setor O, Ceilândia - DF",
+    line1: "QNO 05, Conjunto P, Casa 47",
+    line2: "Setor O, Ceilândia - DF",
+    postalCode: "72255-060",
   },
   restaurantHours: {
     days: "Todos os dias",
@@ -57,19 +57,16 @@ export const siteContent = {
       display: "(61) 98490-1611",
     },
     instagram: {
-      handle: "@paladarprimerestaurante",
-      href: "https://www.instagram.com/paladarprimerestaurante/" satisfies HttpsUrl,
+      handle: "@restaurantecheiroverdedf",
+      href: "https://www.instagram.com/restaurantecheiroverdedf/" satisfies HttpsUrl,
+      label: "Instagram",
     },
     email: {
-      address: "churrascaria.paladar.df@gmail.com",
-      href: "mailto:churrascaria.paladar.df@gmail.com" satisfies MailtoUrl,
+      address: "cheiroverdesetoro@gmail.com",
+      href: "mailto:cheiroverdesetoro@gmail.com" satisfies MailtoUrl,
     },
   },
   externalLinks: {
-    googleMaps: {
-      label: "Paladar Prime Restaurante no Google Maps",
-      href: siteLinks.googleMaps,
-    },
     buffet: {
       label: "Paladar Buffet",
       href: "https://buffetpaladar.com.br/" satisfies HttpsUrl,

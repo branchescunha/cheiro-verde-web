@@ -37,6 +37,11 @@
   text-transform: uppercase;
 }
 
+.heroContent .eyebrow {
+  color: var(--color-on-dark-brand);
+  text-shadow: none;
+}
+
 .eyebrowDark {
   color: var(--color-brand-on-light);
 }

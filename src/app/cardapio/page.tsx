@@ -12,7 +12,7 @@ export const metadata = createPageMetadata(
   {
     title: "Cardápio de bebidas e sobremesas em Ceilândia",
     description:
-      "Consulte bebidas, sucos, refrigerantes, cervejas e sobremesas disponíveis no Restaurante Paladar em Ceilândia.",
+      "Consulte bebidas, sucos, refrigerantes, cervejas e sobremesas disponíveis no Restaurante Cheiro Verde em Ceilândia.",
     path: "/cardapio",
   },
   seoConfig,
@@ -37,7 +37,7 @@ export default function MenuPage() {
       <header className={styles.intro} aria-labelledby="menu-title">
         <div className={`${styles.container} ${styles.introGrid}`}>
           <div className={styles.introContent}>
-            <p className={styles.eyebrow}>Almoço no Paladar</p>
+            <p className={styles.eyebrow}>Almoço no Cheiro Verde</p>
             <h1 id="menu-title" className={styles.title}>
               Cardápio
             </h1>
@@ -52,7 +52,7 @@ export default function MenuPage() {
           <figure className={styles.menuFeature}>
             <Image
               src="/images/site/paladar-menu-drinks.webp"
-              alt="Seleção de sucos, água, refrigerante e cerveja no Paladar"
+              alt="Seleção de sucos, água, refrigerante e cerveja no Cheiro Verde"
               width={1672}
               height={941}
               priority

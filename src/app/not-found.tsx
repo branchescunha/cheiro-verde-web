@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { PageLink } from "@/components/PageLink/PageLink";
 import { homeStartHref, siteRoutes } from "@/data/site";
 import styles from "./not-found.module.css";
 
@@ -13,18 +13,18 @@ export default function NotFound() {
             O endereço acessado não existe ou não está mais disponível.
           </p>
           <div className={styles.actions}>
-            <Link
+            <PageLink
               className={`${styles.button} ${styles.buttonPrimary}`}
               href={homeStartHref}
             >
               Voltar ao início
-            </Link>
-            <Link
+            </PageLink>
+            <PageLink
               className={`${styles.button} ${styles.buttonSecondary}`}
               href={siteRoutes.menu}
             >
               Ver cardápio
-            </Link>
+            </PageLink>
           </div>
         </div>
 

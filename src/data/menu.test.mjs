@@ -2,6 +2,16 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { beverageCategories } from "./menu.ts";
 
+test("marks every confirmed shared menu price as confirmed", () => {
+  for (const category of beverageCategories) {
+    for (const item of category.items) {
+      for (const option of item.options) {
+        assert.equal(option.price.status, "confirmed");
+      }
+    }
+  }
+});
+
 function getCategory(id) {
   const category = beverageCategories.find((item) => item.id === id);
 

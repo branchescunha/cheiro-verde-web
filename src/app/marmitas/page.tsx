@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { PageLink } from "@/components/PageLink/PageLink";
 import { restaurantContent, type Money } from "@/data/restaurant";
 import { seoConfig } from "@/data/seo";
 import { siteLinks } from "@/data/site-links";
@@ -10,7 +10,7 @@ export const metadata = createPageMetadata(
   {
     title: "Marmitas e delivery em Ceilândia",
     description:
-      "Conheça as marmitas do Restaurante Paladar e consulte horário e taxas de delivery para o Setor O e Ceilândia.",
+      "Conheça as marmitas do Restaurante Cheiro Verde e consulte horário e taxas de delivery para o Setor O e Ceilândia.",
     path: "/marmitas",
   },
   seoConfig,
@@ -42,7 +42,6 @@ export default function LunchboxesPage() {
               Monte sua marmita no buffet ou escolha uma opção da casa para
               tornar o almoço mais prático.
             </p>
-
             <div className={styles.actions}>
               <a
                 className={`${styles.button} ${styles.buttonPrimary}`}
@@ -55,12 +54,12 @@ export default function LunchboxesPage() {
                   {" "}(abre o WhatsApp em nova aba)
                 </span>
               </a>
-              <Link
+              <PageLink
                 className={`${styles.button} ${styles.buttonSecondary}`}
                 href={siteRoutes.menu}
               >
                 Ver cardápio
-              </Link>
+              </PageLink>
             </div>
           </div>
 
@@ -103,7 +102,7 @@ export default function LunchboxesPage() {
             <p className={`${styles.eyebrow} ${styles.eyebrowDark}`}>
               Escolha como montar
             </p>
-            <h2 id="formats-title">Duas formas de levar o Paladar.</h2>
+            <h2 id="formats-title">Duas formas de levar o Cheiro Verde.</h2>
           </div>
 
           <div className={styles.formatList}>
@@ -225,9 +224,7 @@ export default function LunchboxesPage() {
                   <dt>{area.name}</dt>
                   <dd>
                     {formatMoney(area.fee)}
-                    <span>
-                      Taxa de entrega
-                    </span>
+                    <span>Taxa de entrega</span>
                   </dd>
                 </div>
               ))}

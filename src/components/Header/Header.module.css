@@ -21,7 +21,7 @@
 
 .brandLink {
   display: inline-flex;
-  width: 6.875rem;
+  width: 6.25rem;
   min-height: 2.75rem;
   flex: 0 0 auto;
   align-items: center;
@@ -32,6 +32,18 @@
 .logo {
   width: 100%;
   height: auto;
+}
+
+.logoDark {
+  display: none;
+}
+
+:global(:root[data-theme="dark"]) .logoLight {
+  display: none;
+}
+
+:global(:root[data-theme="dark"]) .logoDark {
+  display: block;
 }
 
 .controls {

@@ -159,47 +159,28 @@ export const restaurantContent = {
   },
   history: {
     foundation: {
-      month: "junho",
-      year: 1998,
-      location: "Setor O, Ceilândia",
+      year: 1999,
     },
-    familyBusiness: true,
-    founders: [
-      "Maury Alves da Cunha",
-      "Marcilon Silva Cunha",
-      "Mauri Anderson Silva Cunha",
+    acquisition: {
+      year: 2014,
+      organization: "Grupo Paladar",
+    },
+    renovations: {
+      count: 2,
+      outcomes: [
+        "ambiente mais moderno",
+        "mais conforto",
+        "espaço mais acolhedor",
+      ],
+    },
+    menuEvolution: [
+      "pratos especiais",
+      "frutos do mar",
+      "churrasco Prime",
+      "cortes nobres",
+      "carnes selecionadas",
+      "opções da raça Angus",
     ],
-    leadershipTransition: {
-      period: "2001/2002",
-      leaders: ["Mauri Anderson Silva Cunha", "Alane"],
-      relationship: "casal",
-      developments: [
-        "novos investimentos",
-        "melhorias",
-        "crescimento da estrutura",
-      ],
-    },
-    evolution: {
-      developments: [
-        "ampliação do espaço",
-        "mais variedade",
-        "melhorias na experiência",
-      ],
-      preservedValue: "essência familiar",
-    },
-    renovation: {
-      year: 2022,
-      developments: [
-        "uma grande reforma",
-        "fortalecimento do churrasco selecionado",
-        "introdução e fortalecimento de carnes nobres e cortes Angus",
-      ],
-    },
-    present: {
-      locationRole: "parte da rotina de Ceilândia",
-      service: "almoço todos os dias",
-      continuity: "tradição familiar desde 1998",
-    },
-    legacy: "tradição familiar e presença em Ceilândia desde 1998",
+    legacy: "tradição, sabor e qualidade",
   },
 } as const;

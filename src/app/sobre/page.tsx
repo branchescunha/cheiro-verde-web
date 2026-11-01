@@ -1,11 +1,11 @@
 import Image, { getImageProps } from "next/image";
-import Link from "next/link";
+import { PageLink } from "@/components/PageLink/PageLink";
 import facadeMobile from "../../../assets/hero-references/mobile/facade.jpg";
 import tablesDesktop from "../../../assets/hero-references/desktop/tables.jpg";
 import tablesMobile from "../../../assets/hero-references/mobile/tables.jpg";
 import { restaurantContent } from "@/data/restaurant";
 import { seoConfig } from "@/data/seo";
-import { siteContent, siteRoutes } from "@/data/site";
+import { siteRoutes } from "@/data/site";
 import { createPageMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
 
@@ -13,20 +13,15 @@ export const metadata = createPageMetadata(
   {
     title: "Nossa história",
     description:
-      "Conheça a história do Paladar, restaurante familiar presente em Ceilândia desde 1998.",
+      "Conheça a história do Restaurante Cheiro Verde, fundado em 1999 e integrante do Grupo Paladar desde 2014.",
     path: "/sobre",
   },
   seoConfig,
 );
 
-const listFormatter = new Intl.ListFormat("pt-BR", {
-  style: "long",
-  type: "conjunction",
-});
-
 function FacadeGalleryImage() {
   const common = {
-    alt: "Fachada atual do Restaurante Paladar",
+    alt: "Fachada do Restaurante Cheiro Verde",
     sizes: "(min-width: 768px) 64vw, 60vw",
   };
   const {
@@ -54,7 +49,7 @@ function FacadeGalleryImage() {
 
 function TablesGalleryImage() {
   const common = {
-    alt: "Mesas e salão atual do Restaurante Paladar",
+    alt: "Mesas e salão do Restaurante Cheiro Verde",
     sizes: "(min-width: 768px) 32vw, 40vw",
   };
   const {
@@ -80,14 +75,6 @@ function TablesGalleryImage() {
 
 export default function AboutPage() {
   const { history } = restaurantContent;
-  const founderNames = listFormatter.format(history.founders);
-  const leaderNames = listFormatter.format(history.leadershipTransition.leaders);
-  const leadershipDevelopments = listFormatter.format(
-    history.leadershipTransition.developments,
-  );
-  const renovationDevelopments = listFormatter.format(
-    history.renovation.developments,
-  );
 
   return (
     <main className={styles.main}>
@@ -96,11 +83,11 @@ export default function AboutPage() {
           <div className={styles.heroContent}>
             <p className={styles.eyebrow}>Desde {history.foundation.year}</p>
             <h1 id="about-title" className={styles.heroTitle}>
-              Uma história de família, trabalho e Ceilândia.
+              Tradição, sabor e qualidade desde 1999.
             </h1>
             <p className={styles.heroText}>
-              O Paladar nasceu no Setor O e cresceu em Ceilândia, preservando
-              a essência familiar em cada nova fase.
+              O Cheiro Verde construiu uma trajetória de compromisso com a boa
+              gastronomia e com a experiência de seus clientes.
             </p>
           </div>
 
@@ -120,19 +107,21 @@ export default function AboutPage() {
               Nossa origem
             </p>
             <h2 id="origin-title" className={styles.sectionTitle}>
-              Uma mesa que começou em família.
+              Uma trajetória construída desde 1999.
             </h2>
           </div>
 
           <div className={styles.originContent}>
             <p>
-              Em {history.foundation.month} de {history.foundation.year}, a
-              Churrascaria Paladar abriu as portas no{" "}
-              {history.foundation.location} como um negócio familiar simples.
+              Fundado em {history.foundation.year}, o Restaurante Cheiro Verde
+              construiu uma trajetória de tradição, qualidade e compromisso
+              com a boa gastronomia.
             </p>
             <p>
-              A história começou com {founderNames}, unindo gerações em torno
-              do mesmo trabalho.
+              Em {history.acquisition.year}, o restaurante foi adquirido pelo{" "}
+              {history.acquisition.organization}, iniciando uma nova fase de
+              crescimento, modernização e valorização da experiência dos
+              clientes.
             </p>
           </div>
         </div>
@@ -144,13 +133,13 @@ export default function AboutPage() {
       >
         <div className={styles.container}>
           <div className={styles.galleryIntroduction}>
-            <p className={styles.eyebrow}>O Paladar hoje</p>
+            <p className={styles.eyebrow}>O Cheiro Verde hoje</p>
             <h2 id="space-gallery-title" className={styles.sectionTitle}>
               O espaço onde essa história continua.
             </h2>
             <p>
-              Registros atuais da fachada e dos ambientes internos do
-              restaurante no Setor O.
+              Um ambiente pensado para oferecer conforto e acolhimento aos
+              clientes.
             </p>
           </div>
 
@@ -164,7 +153,7 @@ export default function AboutPage() {
             <figure>
               <Image
                 src="/images/site/restaurant-interior.webp"
-                alt="Salão atual do Restaurante Paladar"
+                alt="Salão do Restaurante Cheiro Verde"
                 width={1280}
                 height={720}
                 sizes="(min-width: 768px) 32vw, 100vw"
@@ -197,38 +186,35 @@ export default function AboutPage() {
               <div className={styles.milestoneContent}>
                 <h3>O começo</h3>
                 <p>
-                  O Paladar nasce no {history.foundation.location} pelas mãos
-                  de {founderNames}.
+                  Fundação do Restaurante Cheiro Verde e início de uma
+                  trajetória dedicada à boa gastronomia.
                 </p>
               </div>
             </li>
 
             <li>
               <p className={styles.milestonePeriod}>
-                {history.leadershipTransition.period}
+                <time dateTime={String(history.acquisition.year)}>
+                  {history.acquisition.year}
+                </time>
               </p>
               <div className={styles.milestoneContent}>
                 <h3>Uma nova fase</h3>
                 <p>
-                  O {history.leadershipTransition.relationship} {leaderNames}
-                  {" "}
-                  assume integralmente a condução do restaurante, iniciando{
-                  " "}
-                  {leadershipDevelopments}.
+                  Aquisição pelo {history.acquisition.organization} e início de
+                  uma fase de crescimento, modernização e valorização da
+                  experiência dos clientes.
                 </p>
               </div>
             </li>
 
             <li>
-              <p className={styles.milestonePeriod}>
-                <time dateTime={String(history.renovation.year)}>
-                  {history.renovation.year}
-                </time>
-              </p>
+              <p className={styles.milestonePeriod}>Desde 2014</p>
               <div className={styles.milestoneContent}>
-                <h3>Renovar para seguir em frente</h3>
+                <h3>Um espaço renovado</h3>
                 <p>
-                  O restaurante passa por {renovationDevelopments}.
+                  Duas grandes reformas tornaram o ambiente mais moderno,
+                  confortável e acolhedor.
                 </p>
               </div>
             </li>
@@ -238,11 +224,9 @@ export default function AboutPage() {
               <div className={styles.milestoneContent}>
                 <h3>Presença que continua</h3>
                 <p>
-                  O Paladar é {history.present.locationRole}, servindo{
-                  " "}
-                  {history.present.service} e mantendo sua{
-                  " "}
-                  {history.present.continuity}.
+                  O Cheiro Verde consolidou-se como restaurante de referência
+                  na região e na cidade, com qualidade, variedade e excelência
+                  no atendimento.
                 </p>
               </div>
             </li>
@@ -261,22 +245,17 @@ export default function AboutPage() {
               Tradição que evolui
             </p>
             <h2 id="evolution-title" className={styles.sectionTitle}>
-              Crescer sem deixar de ser Paladar.
+              Crescer sem perder a tradição.
             </h2>
           </div>
 
           <div className={styles.evolutionContent}>
             <p>
-              Ao longo dos anos, o restaurante avançou com novos sabores e uma
-              experiência cada vez mais completa, preservando sua{
-              " "}
-              {history.evolution.preservedValue}.
+              O cardápio foi ampliado e ganhou opções especiais, com frutos do
+              mar e churrasco Prime preparado com carnes selecionadas.
             </p>
             <ul>
-              {history.evolution.developments.map((development) => (
-                <li key={development}>{development}</li>
-              ))}
-              {history.renovation.developments.slice(1).map((development) => (
+              {history.menuEvolution.map((development) => (
                 <li key={development}>{development}</li>
               ))}
             </ul>
@@ -288,26 +267,23 @@ export default function AboutPage() {
         <div className={`${styles.container} ${styles.finalCtaInner}`}>
           <div>
             <p className={`${styles.eyebrow} ${styles.eyebrowDark}`}>
-              Desde 1998
+              Desde {history.foundation.year}
             </p>
             <h2 id="visit-title">Essa história continua à mesa.</h2>
           </div>
           <div className={styles.actions}>
-            <Link
+            <PageLink
               className={`${styles.button} ${styles.buttonDark}`}
               href={siteRoutes.menu}
             >
               Ver cardápio
-            </Link>
-            <a
+            </PageLink>
+            <PageLink
               className={`${styles.button} ${styles.buttonGhost}`}
-              href={siteContent.externalLinks.googleMaps.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Como chegar pelo Google Maps (abre em nova aba)"
+              href={siteRoutes.contact}
             >
-              Como chegar
-            </a>
+              Ver contato
+            </PageLink>
           </div>
         </div>
       </section>

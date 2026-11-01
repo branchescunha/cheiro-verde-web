@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { PageLink } from "@/components/PageLink/PageLink";
 import { restaurantContent } from "@/data/restaurant";
 import { seoConfig } from "@/data/seo";
 import { siteLinks } from "@/data/site-links";
@@ -10,7 +10,7 @@ export const metadata = createPageMetadata(
   {
     title: "Contato e localização em Ceilândia",
     description:
-      "Consulte o endereço, horários, contatos e informações de funcionamento do Restaurante Paladar em Ceilândia.",
+      "Consulte o endereço, horários, contatos e informações de funcionamento do Restaurante Cheiro Verde em Ceilândia.",
     path: "/contato",
   },
   seoConfig,
@@ -29,7 +29,7 @@ const listFormatter = new Intl.ListFormat("pt-BR", {
 export default function ContactPage() {
   const { address, contacts, externalLinks, restaurantHours } = siteContent;
   const { benefits, delivery, service } = restaurantContent;
-  const mapsHref = externalLinks.googleMaps.href;
+  const mapsHref = siteLinks.googleMaps;
   const generalWhatsAppHref = siteLinks.whatsApp.general;
   const lunchboxWhatsAppHref = siteLinks.whatsApp.lunchboxes.general;
   const uniformedPrice = currencyFormatter.format(
@@ -46,7 +46,7 @@ export default function ContactPage() {
           <div className={styles.heroContent}>
             <p className={styles.eyebrow}>Venha nos visitar</p>
             <h1 id="contact-page-title" className={styles.heroTitle}>
-              Seu almoço no Paladar começa por aqui.
+              Seu almoço no Cheiro Verde começa por aqui.
             </h1>
             <p className={styles.heroText}>
               Endereço, horários e canais oficiais para planejar sua visita ou
@@ -102,7 +102,7 @@ export default function ContactPage() {
           <div className={styles.informationGrid}>
             <article className={styles.locationCard}>
               <p className={styles.cardLabel}>Onde estamos</p>
-              <h3>Paladar em Ceilândia</h3>
+              <h3>Cheiro Verde em Ceilândia</h3>
               <address>
                 {address.line1}
                 <br />
@@ -115,9 +115,7 @@ export default function ContactPage() {
                 rel="noopener noreferrer"
               >
                 Abrir no Google Maps
-                <span className={styles.visuallyHidden}>
-                  {" "}(abre em nova aba)
-                </span>
+                <span className={styles.visuallyHidden}> (abre em nova aba)</span>
               </a>
             </article>
 
@@ -143,7 +141,7 @@ export default function ContactPage() {
 
             <article className={styles.contactsCard}>
               <p className={styles.cardLabel}>Canais oficiais</p>
-              <h3>Fale com o Paladar</h3>
+              <h3>Fale com o Cheiro Verde</h3>
               <ul className={styles.contactActions}>
                 <li>
                   <a
@@ -177,11 +175,9 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <span>Instagram</span>
+                    <span>{contacts.instagram.label}</span>
                     <strong>{contacts.instagram.handle}</strong>
-                    <span className={styles.visuallyHidden}>
-                      {" "}(abre em nova aba)
-                    </span>
+                    <span className={styles.visuallyHidden}> (abre em nova aba)</span>
                   </a>
                 </li>
                 <li>
@@ -257,25 +253,28 @@ export default function ContactPage() {
             <details>
               <summary>Quais são os dias e horários de funcionamento?</summary>
               <p>
-                O Paladar funciona {restaurantHours.days.toLowerCase()}, das{" "}
+                O Cheiro Verde funciona {restaurantHours.days.toLowerCase()}, das{" "}
                 {restaurantHours.opensAtLabel} às {restaurantHours.closesAtLabel}.
               </p>
             </details>
             <details>
-              <summary>Onde fica o Paladar?</summary>
+              <summary>Onde fica o Cheiro Verde?</summary>
               <p>
                 {address.line1}, {address.line2}.
               </p>
             </details>
             <details>
               <summary>O restaurante serve jantar?</summary>
-              <p>Não. O Paladar funciona apenas no almoço.</p>
+              <p>Não. O Cheiro Verde funciona apenas no almoço.</p>
             </details>
             <details>
-              <summary>O Paladar trabalha com marmitas?</summary>
+              <summary>O Cheiro Verde trabalha com marmitas?</summary>
               <p>
                 Sim. Conheça as opções e informações disponíveis na página de{" "}
-                <Link href={siteRoutes.lunchboxes}>Marmitas &amp; Delivery</Link>.
+                <PageLink href={siteRoutes.lunchboxes}>
+                  Marmitas &amp; Delivery
+                </PageLink>
+                .
               </p>
             </details>
             <details>
@@ -302,10 +301,11 @@ export default function ContactPage() {
               </p>
             </details>
             <details>
-              <summary>O Paladar realiza festas e eventos?</summary>
+              <summary>O Cheiro Verde realiza festas e eventos?</summary>
               <p>
-                O Paladar Buffet é a frente dedicada a festas e eventos. Saiba
-                mais na <Link href={siteRoutes.buffet}>página do Buffet</Link> ou
+                O Paladar Buffet é o parceiro do Cheiro Verde para festas e
+                eventos. Saiba
+                mais na <PageLink href={siteRoutes.buffet}>página do Buffet</PageLink> ou
                 acesse o{" "}
                 <a
                   href={externalLinks.buffet.href}

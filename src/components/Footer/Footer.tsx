@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { PageLink } from "@/components/PageLink/PageLink";
 import { siteLinks } from "@/data/site-links";
 import {
   homeStartHref,
@@ -16,20 +16,30 @@ export function Footer() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.brand}>
-            <Link
+            <PageLink
               className={styles.brandLink}
               href={homeStartHref}
-              aria-label={`${siteContent.brand.primaryName} — início da página`}
+              aria-label="Ir para o início da página"
             >
               <Image
-                className={styles.logo}
-                src="/images/brand/paladar-logo-transparent.png"
+                className={`${styles.logo} ${styles.logoLight}`}
+                src="/images/brand/cheiro-verde-logo-light.png"
                 alt=""
-                width={1480}
-                height={916}
-                sizes="136px"
+                aria-hidden="true"
+                width={768}
+                height={565}
+                sizes="122px"
               />
-            </Link>
+              <Image
+                className={`${styles.logo} ${styles.logoDark}`}
+                src="/images/brand/cheiro-verde-logo-dark.png"
+                alt=""
+                aria-hidden="true"
+                width={768}
+                height={565}
+                sizes="122px"
+              />
+            </PageLink>
           </div>
 
           <section
@@ -69,9 +79,9 @@ export function Footer() {
             <ul className={styles.navigationList}>
               {navigationItems.map((item) => (
                 <li key={item.href}>
-                  <Link className={styles.footerLink} href={item.href}>
+                  <PageLink className={styles.footerLink} href={item.href}>
                     {item.label}
-                  </Link>
+                  </PageLink>
                 </li>
               ))}
             </ul>
@@ -94,10 +104,7 @@ export function Footer() {
                 >
                   <span className={styles.contactLabel}>WhatsApp</span>
                   <span>{siteContent.contacts.generalWhatsApp.display}</span>
-                  <span className={styles.visuallyHidden}>
-                    {" "}
-                    (abre em nova aba)
-                  </span>
+                  <span className={styles.visuallyHidden}> (abre em nova aba)</span>
                 </a>
               </li>
               <li>
@@ -109,10 +116,7 @@ export function Footer() {
                 >
                   <span className={styles.contactLabel}>Marmitas</span>
                   <span>{siteContent.contacts.lunchboxWhatsApp.display}</span>
-                  <span className={styles.visuallyHidden}>
-                    {" "}
-                    (abre em nova aba)
-                  </span>
+                  <span className={styles.visuallyHidden}> (abre em nova aba)</span>
                 </a>
               </li>
               <li>
@@ -122,12 +126,11 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className={styles.contactLabel}>Instagram</span>
-                  <span>{siteContent.contacts.instagram.handle}</span>
-                  <span className={styles.visuallyHidden}>
-                    {" "}
-                    (abre em nova aba)
+                  <span className={styles.contactLabel}>
+                    {siteContent.contacts.instagram.label}
                   </span>
+                  <span>{siteContent.contacts.instagram.handle}</span>
+                  <span className={styles.visuallyHidden}> (abre em nova aba)</span>
                 </a>
               </li>
             </ul>

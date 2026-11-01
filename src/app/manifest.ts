@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Restaurante Paladar",
-    short_name: "Paladar",
-    description: "Site oficial do restaurante Paladar.",
+    name: "Restaurante Cheiro Verde",
+    short_name: "Cheiro Verde",
+    description: "Site oficial do Restaurante Cheiro Verde.",
     start_url: "/",
     display: "standalone",
     background_color: "#fffaf2",

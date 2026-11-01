@@ -1,14 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type MouseEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { PageLink } from "@/components/PageLink/PageLink";
 import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
 import {
   homeStartHref,
   navigationItems,
-  siteContent,
   siteRoutes,
 } from "@/data/site";
 import styles from "./Header.module.css";
@@ -47,50 +46,36 @@ export function Header() {
     setIsMenuOpen(false);
   }
 
-  function handleBrandClick(event: MouseEvent<HTMLAnchorElement>) {
-    closeMenu();
-
-    const isModifiedClick =
-      event.button !== 0 ||
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey;
-
-    if (pathname !== siteRoutes.home || isModifiedClick) {
-      return;
-    }
-
-    const homeStart = document.getElementById("inicio");
-
-    if (!homeStart) {
-      return;
-    }
-
-    event.preventDefault();
-    window.history.replaceState(window.history.state, "", homeStartHref);
-    homeStart.scrollIntoView({ block: "start" });
-  }
-
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <Link
+        <PageLink
           className={styles.brandLink}
           href={homeStartHref}
-          aria-label={`${siteContent.brand.primaryName} — início da página`}
-          onClick={handleBrandClick}
+          aria-label="Ir para o início da página"
+          onClick={closeMenu}
         >
           <Image
-            className={styles.logo}
-            src="/images/brand/paladar-logo-transparent.png"
+            className={`${styles.logo} ${styles.logoLight}`}
+            src="/images/brand/cheiro-verde-logo-light.png"
             alt=""
-            width={1480}
-            height={916}
-            sizes="110px"
+            aria-hidden="true"
+            width={768}
+            height={565}
+            sizes="100px"
             loading="eager"
           />
-        </Link>
+          <Image
+            className={`${styles.logo} ${styles.logoDark}`}
+            src="/images/brand/cheiro-verde-logo-dark.png"
+            alt=""
+            aria-hidden="true"
+            width={768}
+            height={565}
+            sizes="100px"
+            loading="eager"
+          />
+        </PageLink>
 
         <div className={styles.controls}>
           <ThemeToggle />
@@ -123,7 +108,7 @@ export function Header() {
 
               return (
                 <li key={item.href}>
-                  <Link
+                  <PageLink
                     className={`${styles.navigationLink} ${
                       isActive ? styles.navigationLinkActive : ""
                     }`}
@@ -132,19 +117,19 @@ export function Header() {
                     onClick={closeMenu}
                   >
                     {item.label}
-                  </Link>
+                  </PageLink>
                 </li>
               );
             })}
           </ul>
 
-          <Link
+          <PageLink
             className={styles.cta}
             href={siteRoutes.lunchboxes}
             onClick={closeMenu}
           >
             Pedir marmita
-          </Link>
+          </PageLink>
         </nav>
       </div>
     </header>

@@ -10,13 +10,13 @@ const testOrigin = "https://example.test";
 const socialImageUrl = `${testOrigin}/social-preview.jpg`;
 const seoConfig = {
   siteUrl: testOrigin,
-  siteName: "Paladar Teste",
+  siteName: "Restaurante Teste",
   locale: "pt_BR",
   socialImage: {
     url: socialImageUrl,
     width: 1200,
     height: 630,
-    alt: "Paladar Teste",
+    alt: "Restaurante Teste",
   },
   logoUrl: `${testOrigin}/logo.png`,
   menuUrl: `${testOrigin}/cardapio`,
@@ -35,7 +35,7 @@ test("builds route metadata from the supplied SEO configuration", () => {
   const metadata = createPageMetadata(
     {
       title: "Cardápio de bebidas e sobremesas em Ceilândia",
-      description: "Consulte as bebidas e sobremesas disponíveis no Paladar.",
+      description: "Consulte as bebidas e sobremesas disponíveis no restaurante.",
       path: "/cardapio",
     },
     seoConfig,
@@ -46,7 +46,7 @@ test("builds route metadata from the supplied SEO configuration", () => {
     `${testOrigin}/cardapio`,
   );
   assert.equal(metadata.openGraph?.url, `${testOrigin}/cardapio`);
-  assert.equal(metadata.openGraph?.siteName, "Paladar Teste");
+  assert.equal(metadata.openGraph?.siteName, "Restaurante Teste");
   assert.equal(metadata.openGraph?.title, metadata.title);
   assert.equal(metadata.openGraph?.description, metadata.description);
   assert.deepEqual(metadata.openGraph?.images, [
@@ -54,7 +54,7 @@ test("builds route metadata from the supplied SEO configuration", () => {
       url: socialImageUrl,
       width: 1200,
       height: 630,
-      alt: "Paladar Teste",
+      alt: "Restaurante Teste",
     },
   ]);
   assert.equal(metadata.twitter?.card, "summary_large_image");
@@ -68,8 +68,8 @@ test("builds route metadata from the supplied SEO configuration", () => {
 test("supports an absolute Home title without applying the global template", () => {
   const metadata = createPageMetadata(
     {
-      title: "Restaurante Paladar | Almoço em Ceilândia",
-      description: "Restaurante Paladar em Ceilândia.",
+      title: "Restaurante Teste | Almoço em Ceilândia",
+      description: "Restaurante Teste em Ceilândia.",
       path: "/",
       absoluteTitle: true,
     },
@@ -77,26 +77,85 @@ test("supports an absolute Home title without applying the global template", () 
   );
 
   assert.deepEqual(metadata.title, {
-    absolute: "Restaurante Paladar | Almoço em Ceilândia",
+    absolute: "Restaurante Teste | Almoço em Ceilândia",
+  });
+});
+
+test("omits absolute URLs when the definitive domain is unavailable", () => {
+  const metadata = createPageMetadata(
+    {
+      title: "Restaurante Cheiro Verde",
+      description: "Restaurante Cheiro Verde em Ceilândia.",
+      path: "/",
+      absoluteTitle: true,
+    },
+    {
+      siteName: "Restaurante Cheiro Verde",
+      locale: "pt_BR",
+    },
+  );
+
+  assert.equal(metadata.alternates, undefined);
+  assert.equal(metadata.openGraph?.url, undefined);
+  assert.equal(metadata.openGraph?.images, undefined);
+  assert.equal(metadata.twitter?.images, undefined);
+});
+
+test("creates structured data without pending contact and schedule fields", () => {
+  const structuredData = createRestaurantStructuredData(
+    {
+      name: "Restaurante Cheiro Verde",
+      alternateNames: ["Cheiro Verde"],
+      legalName: "RESTAURANTE CHEIRO VERDE SELF SERVICE LTDA",
+      email: "cheiroverdesetoro@gmail.com",
+      foundingDate: "1999",
+      address: {
+        streetAddress: "QNO 05, Conjunto P, Casa 47, Setor O",
+        postalCode: "72255-060",
+        addressLocality: "Ceilândia",
+        addressRegion: "DF",
+        addressCountry: "BR",
+      },
+    },
+    {
+      siteName: "Restaurante Cheiro Verde",
+      locale: "pt_BR",
+    },
+  );
+
+  assert.equal(structuredData.legalName, "RESTAURANTE CHEIRO VERDE SELF SERVICE LTDA");
+  assert.equal(structuredData.email, "cheiroverdesetoro@gmail.com");
+  assert.equal(structuredData.foundingDate, "1999");
+  assert.equal("url" in structuredData, false);
+  assert.equal("telephone" in structuredData, false);
+  assert.equal("sameAs" in structuredData, false);
+  assert.equal("openingHoursSpecification" in structuredData, false);
+  assert.deepEqual(structuredData.address, {
+    "@type": "PostalAddress",
+    streetAddress: "QNO 05, Conjunto P, Casa 47, Setor O",
+    postalCode: "72255-060",
+    addressLocality: "Ceilândia",
+    addressRegion: "DF",
+    addressCountry: "BR",
   });
 });
 
 test("creates Restaurant structured data with only confirmed local data", () => {
   const structuredData = createRestaurantStructuredData(
     {
-      name: "Restaurante Paladar",
-      alternateNames: ["Paladar", "Paladar Prime Restaurante"],
+      name: "Restaurante Teste",
+      alternateNames: ["Restaurante Teste Prime"],
       telephone: "+5561984163455",
-      instagramUrl: "https://www.instagram.com/paladarprimerestaurante/",
+      instagramUrl: "https://www.instagram.com/restaurante-teste/",
       address: {
-        streetAddress: "QNO 11 Conjunto O Casa 16, Avenida Oeste, Setor O",
+        streetAddress: "Rua de Teste, 100",
         addressLocality: "Ceilândia",
         addressRegion: "DF",
         addressCountry: "BR",
       },
       openingHours: {
-        opens: "11:30",
-        closes: "15:00",
+        opens: "09:00",
+        closes: "18:00",
       },
     },
     seoConfig,
@@ -108,11 +167,11 @@ test("creates Restaurant structured data with only confirmed local data", () => 
   assert.equal(structuredData.url, testOrigin);
   assert.equal(structuredData.telephone, "+5561984163455");
   assert.deepEqual(structuredData.sameAs, [
-    "https://www.instagram.com/paladarprimerestaurante/",
+    "https://www.instagram.com/restaurante-teste/",
   ]);
   assert.deepEqual(structuredData.address, {
     "@type": "PostalAddress",
-    streetAddress: "QNO 11 Conjunto O Casa 16, Avenida Oeste, Setor O",
+    streetAddress: "Rua de Teste, 100",
     addressLocality: "Ceilândia",
     addressRegion: "DF",
     addressCountry: "BR",
@@ -132,8 +191,8 @@ test("creates Restaurant structured data with only confirmed local data", () => 
         "Saturday",
         "Sunday",
       ],
-      opens: "11:30",
-      closes: "15:00",
+      opens: "09:00",
+      closes: "18:00",
     },
   ]);
 
@@ -150,7 +209,7 @@ test("creates Restaurant structured data with only confirmed local data", () => 
 
 test("escapes HTML-significant characters when serializing JSON-LD", () => {
   assert.equal(
-    serializeJsonLd({ name: "Paladar </script><script>alert(1)</script>" }),
-    '{"name":"Paladar \\u003c/script>\\u003cscript>alert(1)\\u003c/script>"}',
+    serializeJsonLd({ name: "Teste </script><script>alert(1)</script>" }),
+    '{"name":"Teste \\u003c/script>\\u003cscript>alert(1)\\u003c/script>"}',
   );
 });
