@@ -1,108 +1,71 @@
-# Paladar Web
+# Restaurante Cheiro Verde
 
-Site institucional e comercial do Restaurante Paladar, em Ceilândia (DF). A aplicação apresenta o restaurante, o cardápio de bebidas e sobremesas, as marmitas, a história da marca, o Paladar Buffet e os canais oficiais de contato.
+## Descrição
 
-**Site oficial:** [churrascariapaladar.com.br](https://churrascariapaladar.com.br)
+Site institucional oficial do Restaurante Cheiro Verde, desenvolvido para apresentar a identidade visual do estabelecimento, sua história, informações comerciais, cardápio de bebidas, opções de marmitas e canais de atendimento.
 
-## Screenshots
+A aplicação utiliza conteúdo local e páginas pré-renderizadas com o App Router do Next.js. A interface foi adaptada para diferentes tamanhos de tela, temas claro e escuro e preferências de movimento reduzido.
 
-### Desktop
+## Demonstração
 
-![Home do Restaurante Paladar em desktop](docs/screenshots/home-desktop.png)
+As capturas desktop e mobile da versão final serão adicionadas após a revisão visual do proprietário. As imagens atualmente preservadas em `docs/screenshots/` pertencem à base anterior e não representam a identidade atual do Cheiro Verde.
 
-### Mobile
+O domínio definitivo ainda não foi informado. Por isso, este README não apresenta uma URL de produção.
 
-![Home do Restaurante Paladar em mobile](docs/screenshots/home-mobile.jpeg)
+## Funcionalidades
 
-## Funcionalidades principais
+- Navegação responsiva entre Home, Cardápio, Marmitas, Sobre, Buffet e Contato.
+- Hero com vídeos específicos para desktop e mobile, sincronizados com a posição do scroll.
+- Suporte a temas claro e escuro com preferência persistida no navegador.
+- Design responsivo com fotografias próprias para orientações desktop e mobile.
+- Apresentação da história e das informações institucionais do restaurante.
+- Cardápio de bebidas e catálogo completo de marmitas.
+- Pedidos pelo WhatsApp, incluindo mensagens específicas para cada marmita.
+- Exibição de endereço, horários, benefícios e canais oficiais de atendimento.
+- Integração com Google Maps, Instagram, e-mail e Paladar Buffet.
+- Estado global de carregamento e página 404 personalizada.
+- Suporte a navegação por teclado, foco visível e `prefers-reduced-motion`.
+- Manifest PWA, ícones, metadata por rota e dados estruturados do restaurante.
 
-- Home responsiva com Hero cinematográfica controlada pelo scroll;
-- navegação global adaptada para desktop e mobile;
-- temas claro e escuro com preferência persistida no navegador;
-- páginas de Cardápio, Marmitas, Sobre, Buffet e Contato;
-- cardápio e informações institucionais centralizados em dados TypeScript;
-- pedidos de marmitas por WhatsApp com mensagens específicas por opção;
-- integração com Google Maps, Instagram, e-mail e site do Paladar Buffet;
-- página 404 e estado global de carregamento personalizados;
-- suporte a `prefers-reduced-motion`, foco visível e navegação por teclado;
-- metadata por rota, canonical, Open Graph, Twitter Cards e JSON-LD do tipo `Restaurant`;
-- `robots.txt`, `sitemap.xml`, manifest, ícones e redirecionamento permanente de `www` para o domínio principal.
+## Tecnologias
 
-## Tecnologias utilizadas
-
-| Tecnologia | Uso |
+| Tecnologia | Uso no projeto |
 | --- | --- |
-| Next.js 16.3.7 | Framework, App Router, renderização e metadata |
-| React 19.2.8 | Interface e componentes interativos |
-| TypeScript 5 | Tipagem da aplicação e dos dados estáticos |
-| CSS Modules | Estilos específicos de páginas e componentes |
-| CSS global | Design tokens, temas, reset e estilos base |
-| ESLint 9 | Análise estática com regras do Next.js |
-| Node.js Test Runner | Testes unitários dos dados e helpers |
-
-O projeto utiliza npm e não depende de backend, banco de dados, CMS ou bibliotecas de interface externas.
+| Next.js 16.4.3 | Framework, App Router, renderização e metadata |
+| React 19.2.8 | Componentes e interações da interface |
+| TypeScript | Tipagem da aplicação e dos dados locais |
+| CSS Modules | Estilos isolados de páginas e componentes |
+| CSS global | Design tokens, temas e estilos base |
+| ESLint 9 | Análise estática do código |
+| Node.js Test Runner | Testes automatizados de dados, helpers e estrutura |
+| npm | Gerenciamento de dependências e scripts |
 
 ## Estrutura do projeto
 
 ```text
-paladar-web/
-├── assets/                 # fontes e referências preservadas de mídia
-├── docs/                   # documentação técnica e da biblioteca de mídia
-├── public/                 # imagens, ícones e vídeos servidos publicamente
+cheiro-verde-web/
+├── assets/
+│   └── branding/           # arquivos-fonte e exports oficiais da marca
+├── docs/                   # documentação técnica do projeto
+├── public/
+│   └── media/
+│       ├── brand/          # logos públicas e imagem social
+│       ├── icons/          # favicons e ícones PWA
+│       ├── menu/           # imagem do cardápio de bebidas
+│       ├── photos/         # fotografias desktop, mobile e parceria Buffet
+│       └── videos/         # vídeos e posters definitivos da Hero
 ├── src/
-│   ├── app/                # rotas, layout, metadata e estilos do App Router
-│   ├── components/         # Header, Footer, Hero e ThemeToggle
-│   ├── data/               # conteúdo estático e configurações tipadas
+│   ├── app/                # páginas, layout, metadata e estilos do App Router
+│   ├── components/         # componentes compartilhados e interativos
+│   ├── data/               # conteúdo, contatos, links e configuração de SEO
 │   └── lib/                # helpers de tema e SEO
-├── next.config.ts          # configuração e canonicalização de host
+├── next.config.ts          # configuração do Next.js
 ├── package.json            # scripts e dependências
-└── tsconfig.json           # configuração TypeScript e alias @/*
+└── tsconfig.json           # configuração do TypeScript
 ```
 
-Detalhes de arquitetura, implantação e manutenção estão em [docs/project-guide.md](docs/project-guide.md). A organização dos assets está documentada em [docs/media-assets.md](docs/media-assets.md).
-
-## Desenvolvimento local
-
-Pré-requisitos: Node.js compatível com Next.js 16 e npm.
-
-```bash
-npm ci
-npm run dev
-```
-
-A aplicação fica disponível em [http://localhost:3000](http://localhost:3000).
-
-Para validar o servidor de produção localmente:
-
-```bash
-npm run build
-npm run start
-```
-
-## Testes e validações
-
-O projeto mantém testes com o runner nativo do Node.js. Como não há um script `test` no `package.json`, a suíte completa é executada diretamente:
-
-```bash
-node --experimental-strip-types --test src/app/theme-contrast.test.mjs src/components/Hero/hero-progress.test.mjs src/data/menu.test.mjs src/data/restaurant.test.mjs src/data/site-links.test.mjs src/lib/seo.test.mjs src/lib/theme.test.mjs
-```
-
-Validações complementares:
-
-```bash
-npm run lint
-npm run build
-git diff --check
-```
-
-## Implantação e hospedagem
-
-O site é hospedado na Hostinger como uma aplicação Next.js executada em Node.js. A entrega é manual, por um arquivo ZIP gerado do `HEAD` validado da branch `main`, sem incluir `node_modules`, `.next`, arquivos de ambiente ou conteúdo não rastreado.
-
-O procedimento completo e o checklist pós-implantação estão em [docs/project-guide.md](docs/project-guide.md#implantação-manual-na-hostinger).
+Os detalhes de arquitetura e manutenção estão em [docs/project-guide.md](docs/project-guide.md). A biblioteca de mídias está documentada em [docs/media-assets.md](docs/media-assets.md).
 
 ## Autor
 
-**André Vinícius Branches Cunha**
-
-GitHub: [@branchescunha](https://github.com/branchescunha)
+André Vinícius Branches Cunha
