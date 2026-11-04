@@ -124,11 +124,13 @@ O projeto não usa exportação estática e depende do servidor Next.js, inclusi
 
 ### Dependências e segurança
 
-Na auditoria de 03/11/2026, `npm audit --omit=dev` não apontou vulnerabilidades. O audit completo apontou 16 ocorrências moderadas associadas ao [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249), sobre consumo excessivo de CPU e memória ao processar padrões glob maliciosos. A árvore contém `minimatch@3.1.5` e `10.2.6` nas ferramentas de desenvolvimento.
+O aviso [GHSA-g3hv-75wg-m249 / CVE-2026-118764](https://github.com/advisories/GHSA-g3hv-75wg-m249), atualizado em 04/11/2026, afeta `minimatch >=7.0.0 <11.0.1` no pré-processamento de padrões com `optimizationLevel >= 2`. A versão `3.1.5`, utilizada pelo ESLint e seus plugins, está fora desse intervalo e não possui `firstPhasePreProcess`; não deve ser substituída por uma versão principal incompatível para atender a um alerta genérico.
 
-Pacotes sinalizados: `minimatch`, `eslint`, `eslint-config-next`, `@eslint-community/eslint-utils`, `@eslint/config-array`, `@eslint/eslintrc`, `@next/eslint-plugin-next`, `@typescript-eslint/eslint-plugin`, `@typescript-eslint/parser`, `@typescript-eslint/type-utils`, `@typescript-eslint/typescript-estree`, `@typescript-eslint/utils`, `typescript-eslint`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y` e `eslint-plugin-react`.
+A ocorrência aplicável era `minimatch@10.2.6`, instalada por `eslint-config-next → typescript-eslint → @typescript-eslint/typescript-estree@8.71.0`. Essa cadeia é exclusivamente de desenvolvimento. O consumidor usa a função nomeada `minimatch(caminho, padrão, { dot: true })`, preservada em `11.0.1`, sem ativar a otimização afetada.
 
-O risco residual envolve a disponibilidade do lint/CI ao processar entradas não confiáveis. Revisar alterações de configuração e dependências antes de executar contribuições externas. A correção deve ser avaliada em uma atualização compatível dos consumidores de `minimatch`; não aplicar automaticamente os downgrades principais sugeridos pelo audit nem forçar um override incompatível. Revalidar o audit antes da publicação.
+Como não existe patch na linha 10 e o consumidor mais recente consultado (`8.72.1`) ainda exige `^10.2.2`, o projeto aplica um override restrito a `@typescript-eslint/typescript-estree@8.71.0`, fixando `minimatch@11.0.1`. Ele não afeta os consumidores da versão 3. A versão 11 aceita Node.js 22 e altera internamente o mecanismo de matching; a compatibilidade deve ser reavaliada ao atualizar TypeScript ESLint. Remova o override quando houver suporte nativo à versão corrigida. Antes de publicar, execute `npm ci`, ambos os audits, testes, lint, TypeScript e build com Webpack.
+
+A instalação limpa foi validada com Node.js 22.14.0, comparando 64 casos de matching antes e depois e exercitando o parser com `projectService/allowDefaultProject`. Após a correção, `npm audit` e `npm audit --omit=dev` retornaram zero vulnerabilidades. Esses resultados são pontuais e devem ser verificados novamente em atualizações futuras.
 
 ### Conteúdo
 

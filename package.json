@@ -13,6 +13,11 @@
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
+  "overrides": {
+    "@typescript-eslint/typescript-estree@8.71.0": {
+      "minimatch": "11.0.1"
+    }
+  },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
