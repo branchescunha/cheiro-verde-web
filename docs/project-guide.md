@@ -52,7 +52,7 @@ As integrações são apenas links externos para WhatsApp, Google Maps, Instagra
 
 O design system e os temas ficam em `src/app/globals.css`. O tema claro é o padrão e a preferência manual é armazenada no navegador.
 
-A aplicação inclui HTML semântico, foco visível, navegação por teclado, textos alternativos e tratamento de movimento reduzido. O SEO provisório inclui metadata por rota, Open Graph, Twitter Cards, JSON-LD `Restaurant` e robots. Canonicals e URLs absolutas aguardam o domínio oficial; o sitemap permanece vazio. A imagem social existe em `public/media/brand/`, mas sua associação à metadata ainda está pendente da etapa de SEO.
+A aplicação inclui HTML semântico, foco visível, navegação por teclado, textos alternativos e tratamento de movimento reduzido. O SEO utiliza o domínio `https://restaurantecheiroverdedf.com.br`, centralizado em `src/data/seo.ts`: metadata e canonical por rota, Open Graph, Twitter Cards, imagem social oficial, JSON-LD `Restaurant`, robots e sitemap com as seis páginas públicas. A regra geral de rastreamento permite os buscadores, incluindo OAI-SearchBot, sem estabelecer uma política específica para treinamento de IA. A disponibilidade pública e a indexação devem ser verificadas após atualizar a hospedagem e concluir a propagação DNS.
 
 ## Preparação para implantação
 

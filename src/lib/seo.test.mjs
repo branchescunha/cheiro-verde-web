@@ -145,6 +145,9 @@ test("creates Restaurant structured data with only confirmed local data", () => 
     {
       name: "Restaurante Teste",
       alternateNames: ["Restaurante Teste Prime"],
+      description: "Restaurante em Ceilândia.",
+      images: [`${testOrigin}/facade.png`],
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Restaurante",
       telephone: "+5561984163455",
       instagramUrl: "https://www.instagram.com/restaurante-teste/",
       address: {
@@ -176,7 +179,9 @@ test("creates Restaurant structured data with only confirmed local data", () => 
     addressRegion: "DF",
     addressCountry: "BR",
   });
-  assert.equal(structuredData.image, socialImageUrl);
+  assert.deepEqual(structuredData.image, [`${testOrigin}/facade.png`]);
+  assert.equal(structuredData.description, "Restaurante em Ceilândia.");
+  assert.equal(structuredData.hasMap, "https://www.google.com/maps/search/?api=1&query=Restaurante");
   assert.equal(structuredData.logo, `${testOrigin}/logo.png`);
   assert.equal(structuredData.menu, `${testOrigin}/cardapio`);
   assert.deepEqual(structuredData.openingHoursSpecification, [

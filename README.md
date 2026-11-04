@@ -10,7 +10,7 @@ A aplicação utiliza conteúdo local e páginas pré-renderizadas com o App Rou
 
 As capturas desktop e mobile da versão final serão adicionadas após a revisão visual do proprietário. As imagens atualmente preservadas em `docs/screenshots/` pertencem à base anterior e não representam a identidade atual do Cheiro Verde.
 
-O domínio definitivo ainda não foi informado. Por isso, este README não apresenta uma URL de produção.
+Domínio oficial: [restaurantecheiroverdedf.com.br](https://restaurantecheiroverdedf.com.br). A disponibilidade pública depende da propagação DNS e da atualização da hospedagem.
 
 ## Funcionalidades
 
@@ -59,7 +59,7 @@ cheiro-verde-web/
 │   ├── components/         # componentes compartilhados e interativos
 │   ├── data/               # conteúdo, contatos, links e configuração de SEO
 │   └── lib/                # helpers de tema e SEO
-├── next.config.ts          # configuração do Next.js
+├── next.config.mjs         # configuração do Next.js
 ├── package.json            # scripts e dependências
 └── tsconfig.json           # configuração do TypeScript
 ```

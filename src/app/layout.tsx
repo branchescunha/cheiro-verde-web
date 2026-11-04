@@ -15,6 +15,7 @@ const restaurantStructuredData = createRestaurantStructuredData(
 );
 
 export const metadata: Metadata = {
+  metadataBase: new URL(seoConfig.siteUrl),
   title: {
     default: "Restaurante Cheiro Verde | Ceilândia",
     template: "%s | Cheiro Verde",
@@ -26,12 +27,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: seoConfig.locale,
     siteName: seoConfig.siteName,
+    images: [seoConfig.socialImage],
     title: "Restaurante Cheiro Verde | Ceilândia",
     description:
       "Restaurante Cheiro Verde no Setor O, em Ceilândia, com tradição, variedade e qualidade desde 1999.",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
+    images: [seoConfig.socialImage.url],
     title: "Restaurante Cheiro Verde | Ceilândia",
     description:
       "Restaurante Cheiro Verde no Setor O, em Ceilândia, com tradição, variedade e qualidade desde 1999.",

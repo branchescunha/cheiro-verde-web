@@ -28,7 +28,10 @@ export type RestaurantStructuredDataInput = {
   legalName?: string;
   email?: string;
   foundingDate?: string;
-  telephone?: string;
+  description?: string;
+  telephone?: string | readonly string[];
+  images?: readonly string[];
+  mapUrl?: string;
   instagramUrl?: string;
   address: {
     streetAddress: string;
@@ -89,7 +92,10 @@ export function createRestaurantStructuredData(
     legalName,
     email,
     foundingDate,
+    description,
     telephone,
+    images,
+    mapUrl,
     instagramUrl,
     address,
     openingHours,
@@ -101,12 +107,14 @@ export function createRestaurantStructuredData(
     "@type": "Restaurant",
     ...(config.siteUrl ? { "@id": `${config.siteUrl}/#restaurant` } : {}),
     name,
+    ...(description ? { description } : {}),
     alternateName: alternateNames,
     ...(legalName ? { legalName } : {}),
     ...(email ? { email } : {}),
     ...(foundingDate ? { foundingDate } : {}),
     ...(config.siteUrl ? { url: config.siteUrl } : {}),
-    ...(config.socialImage ? { image: config.socialImage.url } : {}),
+    ...(images ? { image: images } : config.socialImage ? { image: config.socialImage.url } : {}),
+    ...(mapUrl ? { hasMap: mapUrl } : {}),
     ...(config.logoUrl ? { logo: config.logoUrl } : {}),
     ...(telephone ? { telephone } : {}),
     ...(instagramUrl ? { sameAs: [instagramUrl] } : {}),
