@@ -8,9 +8,15 @@ A aplicação utiliza conteúdo local e páginas pré-renderizadas com o App Rou
 
 ## Demonstração
 
-As capturas desktop e mobile da versão final serão adicionadas após a revisão visual do proprietário. As imagens atualmente preservadas em `docs/screenshots/` pertencem à base anterior e não representam a identidade atual do Cheiro Verde.
+Site oficial: [restaurantecheiroverdedf.com.br](https://restaurantecheiroverdedf.com.br)
 
-Domínio oficial: [restaurantecheiroverdedf.com.br](https://restaurantecheiroverdedf.com.br). A disponibilidade pública depende da propagação DNS e da atualização da hospedagem.
+### Desktop
+
+![Página inicial do Restaurante Cheiro Verde em desktop](docs/screenshots/home-desktop.png)
+
+### Mobile
+
+![Página inicial do Restaurante Cheiro Verde em dispositivo móvel](docs/screenshots/home-mobile.jpeg)
 
 ## Funcionalidades
 
