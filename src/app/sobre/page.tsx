@@ -1,8 +1,5 @@
-import Image, { getImageProps } from "next/image";
 import { PageLink } from "@/components/PageLink/PageLink";
-import facadeMobile from "../../../assets/hero-references/mobile/facade.jpg";
-import tablesDesktop from "../../../assets/hero-references/desktop/tables.jpg";
-import tablesMobile from "../../../assets/hero-references/mobile/tables.jpg";
+import { ResponsivePhoto } from "@/components/ResponsivePhoto/ResponsivePhoto";
 import { restaurantContent } from "@/data/restaurant";
 import { seoConfig } from "@/data/seo";
 import { siteRoutes } from "@/data/site";
@@ -18,60 +15,6 @@ export const metadata = createPageMetadata(
   },
   seoConfig,
 );
-
-function FacadeGalleryImage() {
-  const common = {
-    alt: "Fachada do Restaurante Cheiro Verde",
-    sizes: "(min-width: 768px) 64vw, 60vw",
-  };
-  const {
-    props: { srcSet: desktopSrcSet },
-  } = getImageProps({
-    ...common,
-    src: "/images/site/restaurant-facade.webp",
-    width: 1440,
-    height: 810,
-  });
-  const {
-    props: { srcSet: mobileSrcSet, alt, ...imageProps },
-  } = getImageProps({
-    ...common,
-    src: facadeMobile,
-  });
-
-  return (
-    <picture>
-      <source media="(min-width: 48rem)" srcSet={desktopSrcSet} />
-      <img {...imageProps} srcSet={mobileSrcSet} alt={alt} />
-    </picture>
-  );
-}
-
-function TablesGalleryImage() {
-  const common = {
-    alt: "Mesas e salão do Restaurante Cheiro Verde",
-    sizes: "(min-width: 768px) 32vw, 40vw",
-  };
-  const {
-    props: { srcSet: desktopSrcSet },
-  } = getImageProps({
-    ...common,
-    src: tablesDesktop,
-  });
-  const {
-    props: { srcSet: mobileSrcSet, alt, ...imageProps },
-  } = getImageProps({
-    ...common,
-    src: tablesMobile,
-  });
-
-  return (
-    <picture>
-      <source media="(min-width: 48rem)" srcSet={desktopSrcSet} />
-      <img {...imageProps} srcSet={mobileSrcSet} alt={alt} />
-    </picture>
-  );
-}
 
 export default function AboutPage() {
   const { history } = restaurantContent;
@@ -145,17 +88,26 @@ export default function AboutPage() {
 
           <div className={styles.galleryGrid}>
             <figure className={styles.galleryPrimary}>
-              <FacadeGalleryImage />
+              <ResponsivePhoto
+                desktopSrc="/media/photos/desktop/buffet-salads-desktop.png"
+                mobileSrc="/media/photos/mobile/buffet-salads-mobile.png"
+                alt="Buffet de saladas do Restaurante Cheiro Verde"
+                sizes="(min-width: 768px) 64vw, 60vw"
+              />
             </figure>
             <figure>
-              <TablesGalleryImage />
+              <ResponsivePhoto
+                desktopSrc="/media/photos/desktop/dining-room-center-desktop.png"
+                mobileSrc="/media/photos/mobile/dining-room-center-mobile.png"
+                alt="Vista central do salão do Restaurante Cheiro Verde"
+                sizes="(min-width: 768px) 32vw, 40vw"
+              />
             </figure>
             <figure>
-              <Image
-                src="/images/site/restaurant-interior.webp"
-                alt="Salão do Restaurante Cheiro Verde"
-                width={1280}
-                height={720}
+              <ResponsivePhoto
+                desktopSrc="/media/photos/desktop/dining-room-side-desktop.png"
+                mobileSrc="/media/photos/mobile/dining-room-side-mobile.png"
+                alt="Vista lateral do salão do Restaurante Cheiro Verde"
                 sizes="(min-width: 768px) 32vw, 100vw"
               />
             </figure>

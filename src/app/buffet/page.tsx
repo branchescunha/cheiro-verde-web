@@ -79,7 +79,7 @@ export default function BuffetPage() {
             aria-label="Abrir o site oficial do Paladar Buffet em nova aba"
           >
             <Image
-              src="/images/site/paladar-buffet-site-preview.webp"
+              src="/media/photos/paladar-buffet-site-preview.webp"
               alt="Prévia da página inicial do site oficial Paladar Buffet"
               width={1440}
               height={900}

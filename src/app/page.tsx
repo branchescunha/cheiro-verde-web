@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { Hero } from "@/components/Hero/Hero";
 import { PageLink } from "@/components/PageLink/PageLink";
+import { ResponsivePhoto } from "@/components/ResponsivePhoto/ResponsivePhoto";
 import { restaurantContent } from "@/data/restaurant";
 import { seoConfig } from "@/data/seo";
 import { siteLinks } from "@/data/site-links";
@@ -60,12 +60,11 @@ export default function Home() {
       >
         <div className={`${styles.container} ${styles.featureGrid}`}>
           <div className={styles.mediaFrame}>
-            <Image
+            <ResponsivePhoto
               className={styles.mediaImage}
-              src="/images/site/restaurant-buffet.webp"
-              alt="Buffet de saladas e acompanhamentos do Cheiro Verde"
-              width={1440}
-              height={810}
+              desktopSrc="/media/photos/desktop/buffet-hot-food-desktop.png"
+              mobileSrc="/media/photos/mobile/buffet-hot-food-mobile.png"
+              alt="Buffet de pratos quentes do Cheiro Verde"
               sizes="(min-width: 48rem) 50vw, 100vw"
             />
           </div>
@@ -96,12 +95,11 @@ export default function Home() {
           className={`${styles.container} ${styles.featureGrid} ${styles.featureGridReverse}`}
         >
           <div className={styles.mediaFrame}>
-            <Image
+            <ResponsivePhoto
               className={styles.mediaImage}
-              src="/images/site/restaurant-grill.webp"
+              desktopSrc="/media/photos/desktop/barbecue-corner-desktop.png"
+              mobileSrc="/media/photos/mobile/barbecue-corner-mobile.png"
               alt="Churrasqueira do Restaurante Cheiro Verde"
-              width={1440}
-              height={810}
               sizes="(min-width: 48rem) 50vw, 100vw"
             />
           </div>
@@ -124,12 +122,11 @@ export default function Home() {
       >
         <div className={`${styles.container} ${styles.featureGrid}`}>
           <div className={styles.mediaFrame}>
-            <Image
+            <ResponsivePhoto
               className={styles.mediaImage}
-              src="/images/site/restaurant-entrance.webp"
-              alt="Entrada do Restaurante Cheiro Verde em Ceilândia"
-              width={1280}
-              height={720}
+              desktopSrc="/media/photos/desktop/facade-close-desktop.png"
+              mobileSrc="/media/photos/mobile/facade-close-mobile.png"
+              alt="Fachada e entrada do Restaurante Cheiro Verde em Ceilândia"
               sizes="(min-width: 48rem) 50vw, 100vw"
             />
           </div>
@@ -193,12 +190,11 @@ export default function Home() {
       >
         <div className={`${styles.container} ${styles.locationGrid}`}>
           <div className={styles.locationMedia}>
-            <Image
+            <ResponsivePhoto
               className={styles.mediaImage}
-              src="/images/site/restaurant-facade.webp"
+              desktopSrc="/media/photos/desktop/facade-wide-desktop.png"
+              mobileSrc="/media/photos/mobile/facade-wide-mobile.png"
               alt="Fachada do Restaurante Cheiro Verde no Setor O"
-              width={1440}
-              height={810}
               sizes="(min-width: 48rem) 50vw, 100vw"
             />
           </div>

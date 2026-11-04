@@ -51,7 +51,7 @@ export default function MenuPage() {
 
           <figure className={styles.menuFeature}>
             <Image
-              src="/images/site/paladar-menu-drinks.webp"
+              src="/media/menu/menu-drinks.webp"
               alt="Seleção de sucos, água, refrigerante e cerveja no Cheiro Verde"
               width={1672}
               height={941}

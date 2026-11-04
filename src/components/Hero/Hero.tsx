@@ -3,6 +3,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import {
   calculateScrollProgress,
+  decideVideoSeek,
   progressToVideoTime,
 } from "./hero-progress";
 import styles from "./Hero.module.css";
@@ -10,14 +11,14 @@ import styles from "./Hero.module.css";
 const desktopMediaQuery = "(min-width: 64rem)";
 const reducedMotionMediaQuery = "(prefers-reduced-motion: reduce)";
 
-const mediaByViewport = {
+const officialMediaByViewport = {
   desktop: {
-    poster: "/images/site/paladar-hero-poster-desktop.webp",
-    video: "/videos/hero/paladar-hero-desktop.mp4",
+    poster: "/media/videos/cheiro-verde-hero-desktop-poster.webp",
+    video: "/media/videos/cheiro-verde-hero-desktop.mp4",
   },
   mobile: {
-    poster: "/images/site/paladar-hero-poster-mobile.webp",
-    video: "/videos/hero/paladar-hero-mobile.mp4",
+    poster: "/media/videos/cheiro-verde-hero-mobile-poster.webp",
+    video: "/media/videos/cheiro-verde-hero-mobile.mp4",
   },
 } as const;
 
@@ -47,19 +48,50 @@ export function Hero({ children, labelledBy }: HeroProps) {
     let animationFrameId: number | null = null;
     let progress = 0;
     let waitingForInitialSeek = false;
+    let pendingSeekTime: number | null = null;
+    let scrollGeometry = {
+      sectionTop: 0,
+      sectionHeight: 0,
+      stickyHeight: 0,
+      stickyTop: 0,
+    };
 
-    function updateVideoTime() {
+    function measureScrollGeometry() {
       const stickyTop = Number.parseFloat(
         window.getComputedStyle(sticky).top,
       );
-      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
 
-      progress = calculateScrollProgress({
-        scrollY: window.scrollY,
-        sectionTop,
+      scrollGeometry = {
+        sectionTop: section.getBoundingClientRect().top + window.scrollY,
         sectionHeight: section.offsetHeight,
         stickyHeight: sticky.offsetHeight,
         stickyTop: Number.isFinite(stickyTop) ? stickyTop : 0,
+      };
+    }
+
+    function requestVideoTime(targetTime: number) {
+      const decision = decideVideoSeek({
+        currentTime: video.currentTime,
+        targetTime,
+        isSeeking: video.seeking,
+        minimumDelta: 1 / 60,
+      });
+
+      pendingSeekTime = decision === "defer" ? targetTime : null;
+
+      if (decision === "defer") {
+        return;
+      }
+
+      if (decision === "seek") {
+        video.currentTime = targetTime;
+      }
+    }
+
+    function updateVideoTime() {
+      progress = calculateScrollProgress({
+        scrollY: window.scrollY,
+        ...scrollGeometry,
       });
 
       if (
@@ -70,10 +102,7 @@ export function Hero({ children, labelledBy }: HeroProps) {
       }
 
       const targetTime = progressToVideoTime(progress, video.duration);
-
-      if (Math.abs(video.currentTime - targetTime) >= 1 / 60) {
-        video.currentTime = targetTime;
-      }
+      requestVideoTime(targetTime);
     }
 
     function scheduleVideoUpdate() {
@@ -115,7 +144,19 @@ export function Hero({ children, labelledBy }: HeroProps) {
     function handleSeeked() {
       waitingForInitialSeek = false;
       video.pause();
+
+      if (pendingSeekTime !== null) {
+        const targetTime = pendingSeekTime;
+        pendingSeekTime = null;
+        requestVideoTime(targetTime);
+      }
+
       showVideo();
+    }
+
+    function handleResize() {
+      measureScrollGeometry();
+      scheduleVideoUpdate();
     }
 
     function applyMediaPreference() {
@@ -123,6 +164,7 @@ export function Hero({ children, labelledBy }: HeroProps) {
 
       if (reducedMotionPreference.matches) {
         section.dataset.videoReady = "false";
+        pendingSeekTime = null;
         video.pause();
         video.removeAttribute("src");
         video.removeAttribute("poster");
@@ -131,8 +173,8 @@ export function Hero({ children, labelledBy }: HeroProps) {
       }
 
       const selectedMedia = desktopPreference.matches
-        ? mediaByViewport.desktop
-        : mediaByViewport.mobile;
+        ? officialMediaByViewport.desktop
+        : officialMediaByViewport.mobile;
 
       video.poster = selectedMedia.poster;
 
@@ -142,13 +184,15 @@ export function Hero({ children, labelledBy }: HeroProps) {
       }
 
       section.dataset.videoReady = "false";
+      pendingSeekTime = null;
       video.pause();
       video.src = selectedMedia.video;
       video.load();
     }
 
+    measureScrollGeometry();
     window.addEventListener("scroll", scheduleVideoUpdate, { passive: true });
-    window.addEventListener("resize", scheduleVideoUpdate, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
     desktopPreference.addEventListener("change", applyMediaPreference);
     reducedMotionPreference.addEventListener("change", applyMediaPreference);
     video.addEventListener("loadedmetadata", handleLoadedMetadata);
@@ -160,7 +204,7 @@ export function Hero({ children, labelledBy }: HeroProps) {
 
     return () => {
       window.removeEventListener("scroll", scheduleVideoUpdate);
-      window.removeEventListener("resize", scheduleVideoUpdate);
+      window.removeEventListener("resize", handleResize);
       desktopPreference.removeEventListener("change", applyMediaPreference);
       reducedMotionPreference.removeEventListener(
         "change",
@@ -187,11 +231,11 @@ export function Hero({ children, labelledBy }: HeroProps) {
         <picture className={styles.poster}>
           <source
             media={desktopMediaQuery}
-            srcSet={mediaByViewport.desktop.poster}
+            srcSet={officialMediaByViewport.desktop.poster}
           />
           <img
             className={styles.posterImage}
-            src={mediaByViewport.mobile.poster}
+            src={officialMediaByViewport.mobile.poster}
             alt=""
             width="936"
             height="1664"

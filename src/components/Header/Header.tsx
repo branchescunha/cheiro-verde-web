@@ -57,7 +57,7 @@ export function Header() {
         >
           <Image
             className={`${styles.logo} ${styles.logoLight}`}
-            src="/images/brand/cheiro-verde-logo-light.png"
+            src="/media/brand/cheiro-verde-logo-light.png"
             alt=""
             aria-hidden="true"
             width={768}
@@ -67,7 +67,7 @@ export function Header() {
           />
           <Image
             className={`${styles.logo} ${styles.logoDark}`}
-            src="/images/brand/cheiro-verde-logo-dark.png"
+            src="/media/brand/cheiro-verde-logo-dark.png"
             alt=""
             aria-hidden="true"
             width={768}

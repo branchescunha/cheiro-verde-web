@@ -6,6 +6,13 @@ type ScrollGeometry = {
   stickyTop: number;
 };
 
+type VideoSeekInput = {
+  currentTime: number;
+  targetTime: number;
+  isSeeking: boolean;
+  minimumDelta: number;
+};
+
 function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(Math.max(value, minimum), maximum);
 }
@@ -33,4 +40,20 @@ export function progressToVideoTime(progress: number, duration: number) {
   }
 
   return clamp(progress, 0, 1) * duration;
+}
+
+export function decideVideoSeek({
+  currentTime,
+  targetTime,
+  isSeeking,
+  minimumDelta,
+}: VideoSeekInput) {
+  if (
+    !Number.isFinite(targetTime) ||
+    Math.abs(currentTime - targetTime) < minimumDelta
+  ) {
+    return "skip" as const;
+  }
+
+  return isSeeking ? ("defer" as const) : ("seek" as const);
 }

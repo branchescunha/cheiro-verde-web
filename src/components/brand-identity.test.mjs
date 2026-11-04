@@ -20,8 +20,8 @@ const contact = readFileSync(
 );
 
 const logoPaths = [
-  "public/images/brand/cheiro-verde-logo-light.png",
-  "public/images/brand/cheiro-verde-logo-dark.png",
+  "public/media/brand/cheiro-verde-logo-light.png",
+  "public/media/brand/cheiro-verde-logo-dark.png",
 ];
 
 function getPngMetadata(path) {

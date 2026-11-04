@@ -1,9 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {
-  calculateScrollProgress,
-  progressToVideoTime,
-} from "./hero-progress.ts";
+import * as heroProgress from "./hero-progress.ts";
+
+const { calculateScrollProgress, progressToVideoTime } = heroProgress;
 
 const geometry = {
   sectionTop: 80,
@@ -28,4 +27,50 @@ test("maps normalized progress to a safe video time", () => {
   assert.equal(progressToVideoTime(-1, 8), 0);
   assert.equal(progressToVideoTime(2, 8), 8);
   assert.equal(progressToVideoTime(0.5, Number.NaN), 0);
+});
+
+test("defers a new video seek while the previous seek is active", () => {
+  assert.equal(typeof heroProgress.decideVideoSeek, "function");
+
+  assert.equal(
+    heroProgress.decideVideoSeek({
+      currentTime: 1,
+      targetTime: 2,
+      isSeeking: true,
+      minimumDelta: 1 / 60,
+    }),
+    "defer",
+  );
+  assert.equal(
+    heroProgress.decideVideoSeek({
+      currentTime: 1,
+      targetTime: 2,
+      isSeeking: false,
+      minimumDelta: 1 / 60,
+    }),
+    "seek",
+  );
+  assert.equal(
+    heroProgress.decideVideoSeek({
+      currentTime: 1,
+      targetTime: 1.005,
+      isSeeking: false,
+      minimumDelta: 1 / 60,
+    }),
+    "skip",
+  );
+});
+
+test("skips invalid and redundant targets even during an active seek", () => {
+  for (const targetTime of [Number.NaN, Number.POSITIVE_INFINITY, 1, 1.005]) {
+    assert.equal(
+      heroProgress.decideVideoSeek({
+        currentTime: 1,
+        targetTime,
+        isSeeking: true,
+        minimumDelta: 1 / 60,
+      }),
+      "skip",
+    );
+  }
 });
