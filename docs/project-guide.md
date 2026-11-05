@@ -56,7 +56,7 @@ A aplicação inclui HTML semântico, foco visível, navegação por teclado, te
 
 ## Preparação para implantação
 
-O pacote de implantação deve ser criado somente depois que as alterações aprovadas estiverem integradas à `main`. Domínio e hospedagem do Cheiro Verde ainda precisam ser confirmados; as instruções abaixo pressupõem um ambiente Node.js compatível.
+O pacote de implantação deve ser criado somente depois que as alterações aprovadas estiverem integradas à `main`. O site do Restaurante Cheiro Verde está publicado e funcionando em produção na Hostinger, no domínio oficial [https://restaurantecheiroverdedf.com.br](https://restaurantecheiroverdedf.com.br).
 
 ### 1. Preparar a branch
 
@@ -107,7 +107,7 @@ No ambiente Node.js configurado para o Cheiro Verde:
 4. inicie ou reinicie o processo com `npm run start`;
 5. mantenha configurações de domínio e infraestrutura no painel da hospedagem, nunca no ZIP.
 
-O projeto não usa exportação estática e depende do servidor Next.js, inclusive para otimização de imagens. Redirecionamentos de domínio serão definidos somente após confirmação do endereço oficial.
+O projeto não usa exportação estática e depende do servidor Next.js, inclusive para otimização de imagens. O endereço oficial em produção é `https://restaurantecheiroverdedf.com.br`; eventuais configurações de redirecionamento devem ser verificadas no painel da Hostinger.
 
 ### 5. Verificar após a publicação
 
